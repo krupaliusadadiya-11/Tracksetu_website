@@ -1,0 +1,80 @@
+:host {
+  display: block;
+}
+
+.section-heading {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.section-heading.align-left {
+  margin: 0;
+  text-align: left;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-self: center;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.align-left .eyebrow {
+  align-self: flex-start;
+}
+
+.supporting {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+}
+.supporting {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+}
+
+/*
+ * Masked slide-up reveal for the heading. Triggered by the [appReveal] directive placed on
+ * this component's host: that directive owns the scroll-into-view detection and adds
+ * "reveal-visible" to the host when it fires, and this line-mask animation keys off that
+ * same class instead of running its own observer.
+ */
+.reveal-heading-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.reveal-heading-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+:host.reveal-visible .reveal-heading-line {
+  animation: sectionHeadingReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sectionHeadingReveal {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-heading-line {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}

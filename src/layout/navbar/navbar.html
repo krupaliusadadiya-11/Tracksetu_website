@@ -1,0 +1,52 @@
+<header class="navbar">
+  <div class="navbar-inner container">
+    <a routerLink="/" class="brand" (click)="closeMenu()" aria-label="TrackSetu home">
+      <img
+        src="/images/TrackSetuLogo.jpg"
+        alt="TrackSetu"
+        class="brand-logo"
+      />
+      <span class="brand-name">TrackSetu</span>
+    </a>
+
+    <nav class="nav-links" [class.open]="menuOpen()" aria-label="Primary navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+      <a routerLink="/features" routerLinkActive="active" (click)="closeMenu()">Features</a>
+      <a routerLink="/book-a-demo" routerLinkActive="active" (click)="closeMenu()">Book a Demo</a>
+
+      <app-button
+        class="mobile-cta"
+        variant="primary"
+        size="md"
+        routerLink="/book-a-demo"
+        (click)="closeMenu()"
+      >
+        Book a Demo
+      </app-button>
+    </nav>
+
+    <div class="navbar-actions">
+      <app-button
+        class="desktop-cta"
+        variant="primary"
+        size="md"
+        routerLink="/book-a-demo"
+      >
+        Book a Demo
+      </app-button>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="primary-navigation"
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>

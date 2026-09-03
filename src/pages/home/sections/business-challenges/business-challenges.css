@@ -1,0 +1,203 @@
+.challenges {
+  padding: var(--space-10) 0;
+}
+
+.challenge-grid {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.challenge-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition:
+    box-shadow var(--motion-base),
+    transform var(--motion-base);
+}
+
+.challenge-card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------
+   TOP
+-------------------------------- */
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-number {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  color: var(--color-border);
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-control);
+  background: var(--color-teal-tint);
+  color: var(--color-secondary);
+}
+
+.card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* --------------------------------
+   TITLE
+-------------------------------- */
+
+.challenge-card h3 {
+  font-size: var(--font-size-h4);
+}
+
+/* --------------------------------
+   CHALLENGE / SOLUTION STACK
+-------------------------------- */
+
+.card-blocks {
+  display: grid;
+  grid-template-areas: "stack";
+  overflow: hidden;
+}
+
+/*
+  Both blocks occupy exactly the same space.
+  The grid automatically takes the height of
+  whichever block is taller.
+*/
+
+.card-block {
+  grid-area: stack;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: var(--space-2);
+  border-radius: var(--radius-control);
+
+  transition:
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 400ms ease;
+}
+
+/* --------------------------------
+   CHALLENGE
+-------------------------------- */
+
+.challenge-block {
+  background: var(--color-background);
+
+  transform: translateY(0);
+  opacity: 1;
+
+  z-index: 2;
+}
+
+/* --------------------------------
+   TRACKSETU SOLUTION
+-------------------------------- */
+
+.solution-block {
+  background: var(--color-teal-tint);
+  border-left: 3px solid var(--color-accent);
+
+  /*
+    Start underneath the challenge block.
+  */
+  transform: translateY(100%);
+  opacity: 0;
+
+  z-index: 1;
+}
+
+/* --------------------------------
+   HOVER ANIMATION
+-------------------------------- */
+
+.challenge-card:hover .challenge-block {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.challenge-card:hover .solution-block {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------
+   LABELS
+-------------------------------- */
+
+.block-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.solution-block .block-label {
+  color: var(--color-secondary);
+}
+
+/* --------------------------------
+   TEXT
+-------------------------------- */
+
+.card-block p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+.solution-block p {
+  color: var(--color-text-primary);
+}
+
+/* --------------------------------
+   RESPONSIVE
+-------------------------------- */
+
+@media (max-width: 1023px) {
+  .challenge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------
+   TOUCH DEVICES
+-------------------------------- */
+
+@media (hover: none) {
+  .challenge-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .challenge-card:hover .challenge-block {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .challenge-card:hover .solution-block {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}

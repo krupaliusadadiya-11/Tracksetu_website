@@ -1,0 +1,24 @@
+<section class="multi-shop">
+  <div class="container multi-shop-inner">
+    <div class="multi-shop-content" appReveal>
+      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Manage Every Location From One Connected System</span></h2>
+      <p class="supporting">
+        TrackSetu keeps location-wise stock and operations connected while giving your business a
+        clear view across shops and godowns.
+      </p>
+
+      <ul class="capability-list">
+        <li *ngFor="let capability of capabilities">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+          <span>{{ capability.title }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="multi-shop-visual" appReveal [revealDelay]="120">
+      <app-product-mockup variant="locations"></app-product-mockup>
+    </div>
+  </div>
+</section>

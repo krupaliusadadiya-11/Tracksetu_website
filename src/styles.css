@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color palette — TrackSetu brand */
+  --color-primary: #063B63;
+  --color-primary-dark: #092F54;
+  --color-secondary: #008F8C;
+  --color-accent: #00B8B5;
+  --color-background: #F5F9FC;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #12233F;
+  --color-text-secondary: #63758C;
+  --color-text-muted: #94A3B8;
+  --color-border: #DCE7EF;
+  --color-success: #079455;
+  --color-success-tint: #E7F7F1;
+  --color-teal-tint: #E8F7F8;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+  --color-info: #3B82F6;
+
+  /* Typography */
+  --font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-size-h1: 56px;
+  --font-size-h2: 40px;
+  --font-size-h3: 28px;
+  --font-size-h4: 22px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+
+  --font-size-h1-mobile: 40px;
+  --font-size-h2-mobile: 32px;
+  --font-size-h3-mobile: 24px;
+
+  --fw-heading: 600;
+  --fw-body: 400;
+  --fw-button: 600;
+
+  /* Spacing scale (8px system) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+
+  /* Radius */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-container: 16px;
+  --radius-pill: 999px;
+
+  /* Container */
+  --container-max: 1200px;
+  --container-pad-desktop: 40px;
+  --container-pad-tablet: 24px;
+  --container-pad-mobile: 16px;
+
+  /* Motion */
+  --motion-fast: 200ms ease;
+  --motion-base: 300ms ease;
+  --motion-slow: 400ms ease;
+
+  /* Shadows — subtle, navy-tinted per brand spec */
+  --shadow-sm: 0 1px 2px rgba(6, 59, 99, 0.05);
+  --shadow-card: 0 8px 30px rgba(6, 59, 99, 0.08);
+  --shadow-raised: 0 12px 32px rgba(6, 59, 99, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-weight: var(--fw-body);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: var(--fw-heading);
+  line-height: 1.25;
+  color: var(--color-primary-dark);
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+
+p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+@media (max-width: 767px) {
+  h1 { font-size: var(--font-size-h1-mobile); }
+  h2 { font-size: var(--font-size-h2-mobile); }
+  h3 { font-size: var(--font-size-h3-mobile); }
+}
+
+/* Utility container used across sections */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--container-pad-desktop);
+  padding-right: var(--container-pad-desktop);
+}
+
+@media (max-width: 1023px) {
+  .container {
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Scroll-reveal animation, applied via the [appReveal] directive */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--motion-slow), transform var(--motion-slow);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

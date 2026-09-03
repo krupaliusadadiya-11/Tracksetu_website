@@ -1,0 +1,520 @@
+.hero {
+  position: relative;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
+  padding: var(--space-12) 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Text block: icons float in the side margins, clear of the heading and copy */
+.hero-text-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) 0;
+}
+
+/*
+ * Orbital background: a single container hosts both the 3 ring paths and the 6 icons, so the
+ * icons can be placed with the exact same circle math the rings are drawn with (each icon sits
+ * at a point on its ring's circumference). Ring 3's paths are drawn past the 0-100 viewBox on
+ * purpose (with overflow:visible on the svg) so it alone extends past the container/hero edge;
+ * the icon radii are all kept inside the box so icons never leave the hero's visible area.
+ */
+.hero-ring {
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(1600px, 85vw, 1400px);
+  height: clamp(1600px, 85vw, 1400px);
+  z-index: 0;
+  pointer-events: none;
+}
+.ring-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-icon {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  color: var(--color-surface);
+}
+
+.hero-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.tile-navy {
+  background: var(--color-primary);
+}
+
+.tile-teal {
+  background: var(--color-secondary);
+}
+
+.tile-cyan {
+  background: var(--color-accent);
+}
+
+/*
+ * Every icon sits at the exact midpoint of its own accent arc above (same radius, same
+ * angle) so it is mathematically on the ring. Kept within a safe vertical band so nothing
+ * drops down far enough to sit behind the dashboard visual or spill outside the hero.
+ */
+.icon-cloud {
+  top: 76%;
+  left: 14.3%;
+}
+
+.icon-security {
+  top: 20.1%;
+  left: -5.1%;
+}
+
+.icon-integrations {
+  top: 94.5%;
+  left: -23.3%;
+}
+
+/* Right side: icon-database (ring 1, upper), icon-analytics (ring 2), icon-automation (ring 3) */
+.icon-database {
+  top: 20.5%;
+  left: 85.6%;
+}
+
+.icon-analytics {
+  top: 68.7%;
+  left: 106.75%;
+}
+
+.icon-automation {
+  top: 120%;
+  left: 118.2%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 720px;
+  text-align: center;
+}
+
+.hero-text {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+    min-height: 560px;
+  max-width: 1160px;
+  padding: var(--space-4) var(--space-6) var(--space-8);
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 8px 40px -16px;
+  background: radial-gradient(circle at 70% 20%, rgba(0, 184, 181, 0.2), transparent 60%);
+  z-index: 0;
+  border-radius: var(--radius-container);
+}
+
+/* Real product screenshot, framed like a browser/app card */
+.hero-dashboard-frame {
+  position: relative;
+  z-index: 1;
+  display: block;
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-raised);
+  background: var(--color-surface);
+}
+
+.hero-dashboard-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Floating phone mockup overlapping the dashboard — a real TrackSetu mobile UI screenshot
+   that already includes its own rounded screen corners and status bar, so it just needs a
+   frame (rounded corners + shadow) rather than a separate CSS bezel/notch. */
+.phone-mockup {
+   position: absolute;
+  z-index: 2;
+  right: 16px;
+  bottom: -32px;
+  width: 192px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-raised); 
+}
+.phone-screen {
+  background: var(--color-surface);
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+}
+.phone-screen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 4% 10%;
+  display: block;
+}
+.phone-mockup-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 1023px) {
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-visual {
+    padding: var(--space-3) var(--space-3) var(--space-8);
+  }
+
+  .hero-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .phone-mockup {
+    right: 4px;
+    width: 152px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: var(--space-10) 0;
+  }
+
+  .hero-actions app-button {
+    width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .hero-text-wrap {
+    padding: var(--space-3) 0;
+  }
+
+  /* Keep the ring large and prominent even on small screens */
+  .hero-ring {
+    width: 640px;
+    height: 640px;
+  }
+
+  /*
+   * On mobile the text column runs edge-to-edge, so there is no gutter beside it to place
+   * icons in without either overlapping the copy or falling off the (much narrower) viewport.
+   * Keep only ring 1's icons, moved into the empty band above the heading instead.
+   */
+  .hero-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .icon-cloud {
+    top: 66%;
+  left: 22.3%;
+  }
+
+  .icon-database {
+    top: -8%;
+    left: 74%;
+  }
+
+  .hero-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-security,
+  .icon-integrations,
+  .icon-analytics,
+  .icon-automation {
+    display: none;
+  }
+
+  .hero-visual {
+    padding: var(--space-2) var(--space-1) var(--space-6);
+  }
+
+  .phone-mockup {
+    right: 0;
+    bottom: -16px;
+    width: 106px;
+    border-radius: 16px;
+  }
+}
+
+/* ==========================================================================
+   Sequential entrance animation, 5 strict steps with no overlap — each stage
+   starts the instant the previous one finishes:
+     1. heading (masked slide-up, line by line)
+     2. supporting text + CTA buttons
+     3. product visual
+     4. the 3 orbit rings
+     5. icons, one by one
+
+   Runs once on load (not scroll-triggered), so it's plain CSS with cumulative
+   animation-delay values rather than the site-wide scroll [appReveal]
+   directive used elsewhere.
+
+   Ring note: rings are faded in via opacity on .ring-svg only (not the outer
+   .hero-ring container, which also holds the icons) — an ancestor's opacity
+   would otherwise mask the icons' own independent step-5 reveal. This also
+   replaces an earlier stroke-dashoffset "draw-in" attempt that didn't work:
+   dashoffset only slides a *repeating* dash pattern along the path, it can't
+   hide it, so the dots were visible from the very first frame.
+   ========================================================================== */
+
+@keyframes heroHeadingLineIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroVisualIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroRingIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heroRingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heroIconIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) translateY(0);
+  }
+}
+
+/* Step 1 (0ms-980ms): heading reveals line by line, masked slide-up */
+.hero-heading .reveal-heading-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.hero-heading .reveal-heading-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  animation: heroHeadingLineIn 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-heading .hero-line-1 {
+  animation-delay: 0ms;
+}
+
+.hero-heading .hero-line-2 {
+  animation-delay: 130ms;
+}
+
+.text-highlight {
+  color: var(--color-secondary);
+}
+
+/* Step 2 (980ms-1640ms): supporting text, then buttons, starting the instant step 1 ends */
+.hero-content .hero-text {
+  opacity: 0;
+  animation: heroFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-content .hero-text:nth-of-type(1) {
+  animation-delay: 980ms;
+}
+
+.hero-content .hero-text:nth-of-type(2) {
+  animation-delay: 1080ms;
+}
+
+.hero-content .hero-actions {
+  opacity: 0;
+  animation: heroFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) 1180ms both;
+}
+
+/* Step 3 (1730ms-2430ms): product visual, starting the instant step 2 ends */
+.hero-visual {
+  opacity: 0;
+  animation: heroVisualIn 700ms cubic-bezier(0.22, 1, 0.36, 1) 1730ms both;
+}
+
+/* Step 4 (2430ms-3110ms): the 3 rings fade in, small stagger between rings.
+   Each ring is 4 <path> elements (2 accent + 2 base-fill) in DOM order, so
+   nth-child groups them without needing extra classes or touching geometry. */
+.ring-svg path {
+  opacity: 0;
+  animation: heroRingIn 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ring-svg path:nth-child(-n + 4) {
+  animation-delay: 2430ms;
+}
+
+.ring-svg path:nth-child(n + 5):nth-child(-n + 8) {
+  animation-delay: 2520ms;
+}
+
+.ring-svg path:nth-child(n + 9) {
+  animation-delay: 2610ms;
+}
+
+/* Ring spin (3110ms-3810ms): once all 3 rings have faded in, they spin a full turn as a
+   flourish before the icons appear. A full 360deg returns the dash pattern to its exact
+   starting look, so the "settled" ring afterwards is pixel-identical to right after step 4. */
+.ring-svg {
+  transform-origin: 50% 50%;
+  animation: heroRingSpin 700ms cubic-bezier(0.22, 1, 0.36, 1) 3110ms both;
+}
+
+/* Step 5 (3810ms-4560ms): icons reveal one by one, starting the instant the ring spin ends */
+.hero-icon {
+  opacity: 0;
+  animation: heroIconIn 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.icon-cloud {
+  animation-delay: 3810ms;
+}
+
+.icon-database {
+  animation-delay: 3900ms;
+}
+
+.icon-security {
+  animation-delay: 3990ms;
+}
+
+.icon-analytics {
+  animation-delay: 4080ms;
+}
+
+.icon-integrations {
+  animation-delay: 4170ms;
+}
+
+.icon-automation {
+  animation-delay: 4260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-heading .reveal-heading-line,
+  .hero-content .hero-text,
+  .hero-content .hero-actions,
+  .hero-visual {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-icon {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .ring-svg path {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .ring-svg {
+    animation: none !important;
+    transform: none !important;
+  }
+}

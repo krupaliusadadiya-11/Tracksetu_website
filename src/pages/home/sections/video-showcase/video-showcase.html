@@ -1,0 +1,35 @@
+<section class="video-showcase" id="video">
+  <div class="container video-inner" appReveal>
+    <div class="video-copy">
+      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">See TrackSetu in Action</span></h2>
+      <p class="supporting">
+        Watch the 95-second product walkthrough to understand how quotations, orders,
+        purchasing, stock, delivery, payments and reports work together.
+      </p>
+    </div>
+
+    <div class="video-frame">
+      <video
+        *ngIf="videoAvailable; else placeholder"
+        [src]="videoSrc"
+        controls
+        preload="metadata"
+        aria-label="TrackSetu 95 second product walkthrough"
+      ></video>
+
+      <ng-template #placeholder>
+        <div class="video-placeholder" role="img" aria-label="TrackSetu product walkthrough video placeholder">
+          <button class="play-button" type="button" aria-label="Watch the Video">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5.5v13l11-6.5-11-6.5z"></path>
+            </svg>
+          </button>
+          <span class="duration-badge">95 sec</span>
+          <span class="placeholder-label">Video coming soon</span>
+        </div>
+      </ng-template>
+    </div>
+
+    <app-button variant="primary" size="lg">Watch the Video</app-button>
+  </div>
+</section>

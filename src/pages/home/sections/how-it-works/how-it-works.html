@@ -1,0 +1,20 @@
+<section class="how-it-works">
+  <div class="container">
+    <app-section-heading
+      appReveal
+      heading="From Quotation to Delivery — Everything Stays Connected"
+    ></app-section-heading>
+
+    <ol class="workflow">
+      <li class="workflow-step" *ngFor="let step of steps; let i = index" [class.reverse]="i % 2 === 1" appReveal>
+        <div class="step-marker">
+          <span class="step-number">{{ step.number }}</span>
+        </div>
+        <div class="step-card">
+          <h4>{{ step.title }}</h4>
+          <p>{{ step.description }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>

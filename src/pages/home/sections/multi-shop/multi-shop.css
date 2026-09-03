@@ -1,0 +1,95 @@
+.multi-shop {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.multi-shop-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.multi-shop-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.supporting {
+  font-size: var(--font-size-body);
+  max-width: 460px;
+}
+
+/* Masked slide-up heading reveal, triggered by the ancestor's [appReveal] class */
+.reveal-heading-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.reveal-heading-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.multi-shop-content.reveal-visible .reveal-heading-line {
+  animation: sectionHeadingReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sectionHeadingReveal {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-heading-line {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}
+
+.capability-list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.capability-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.capability-list svg {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--color-teal-tint);
+  color: var(--color-secondary);
+}
+
+@media (max-width: 1023px) {
+  .multi-shop-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .multi-shop-visual {
+    order: -1;
+  }
+}

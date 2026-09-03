@@ -1,0 +1,31 @@
+<section class="client-env">
+  <div class="container client-env-inner">
+    <div class="client-env-visual" appReveal>
+      <div class="env-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="8" ry="3"></ellipse>
+          <path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"></path>
+          <path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"></path>
+        </svg>
+        <span>Dedicated Environment</span>
+      </div>
+    </div>
+
+    <div class="client-env-content" appReveal [revealDelay]="120">
+      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Your Business Runs in Its Own Environment</span></h2>
+      <p class="supporting">
+        Each client gets their own software environment and database, with setup and access
+        configured according to their business requirements.
+      </p>
+
+      <ul class="env-list">
+        <li *ngFor="let point of points">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+          <span>{{ point.title }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

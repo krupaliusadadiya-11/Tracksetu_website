@@ -1,0 +1,33 @@
+<ng-template #projectedContent>
+  <ng-content></ng-content>
+</ng-template>
+
+<a
+  *ngIf="routerLink; else hrefOrButton"
+  class="btn btn-{{ variant }} btn-{{ size }}"
+  [routerLink]="routerLink"
+  [attr.aria-label]="ariaLabel || null"
+>
+  <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
+</a>
+
+<ng-template #hrefOrButton>
+  <a
+    *ngIf="href; else plainButton"
+    class="btn btn-{{ variant }} btn-{{ size }}"
+    [href]="href"
+    [attr.aria-label]="ariaLabel || null"
+  >
+    <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
+  </a>
+</ng-template>
+
+<ng-template #plainButton>
+  <button
+    class="btn btn-{{ variant }} btn-{{ size }}"
+    [type]="type"
+    [attr.aria-label]="ariaLabel || null"
+  >
+    <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
+  </button>
+</ng-template>

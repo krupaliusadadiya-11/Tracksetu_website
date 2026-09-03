@@ -1,0 +1,9 @@
+.placeholder-page {
+  padding: var(--space-12) 0;
+  text-align: center;
+  min-height: 40vh;
+}
+
+.placeholder-page p {
+  margin-top: var(--space-2);
+}

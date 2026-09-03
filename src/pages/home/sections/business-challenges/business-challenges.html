@@ -1,0 +1,59 @@
+<section class="challenges">
+  <div class="container">
+    <app-section-heading appReveal
+      heading="When Business Grows, Managing Everything Separately Gets Harder"></app-section-heading>
+
+    <div class="challenge-grid">
+      <article class="challenge-card" *ngFor="let card of cards; let i = index" appReveal [revealDelay]="i * 80">
+        <div class="card-top">
+          <span class="card-number">{{ card.number }}</span>
+          <span class="card-icon" [ngSwitch]="card.icon">
+            <svg *ngSwitchCase="'quotation'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="12" height="18" rx="2"></rect>
+              <path d="M8 8h4"></path>
+              <path d="M8 12h4"></path>
+              <path d="M8 16h2"></path>
+              <rect x="15" y="14" width="6" height="6" rx="1"></rect>
+            </svg>
+            <svg *ngSwitchCase="'stock'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8l9-5 9 5-9 5-9-5z"></path>
+              <path d="M3 8v8l9 5 9-5V8"></path>
+              <path d="M12 13v8"></path>
+            </svg>
+            <svg *ngSwitchCase="'alert'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 9v4"></path>
+              <path d="M12 17h.01"></path>
+              <path d="M10.3 3.9 2.7 17a1.8 1.8 0 0 0 1.5 2.7h15.6a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.8 1.8 0 0 0-3.4 0z">
+              </path>
+            </svg>
+            <svg *ngSwitchCase="'order'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h12l1 5H5l1-5z"></path>
+              <path d="M5 8h14l-1.2 10.2A2 2 0 0 1 15.8 20H8.2a2 2 0 0 1-2-1.8L5 8z"></path>
+              <path d="M9 12h6"></path>
+            </svg>
+          </span>
+        </div>
+
+        <h3>{{ card.title }}</h3>
+
+        <div class="card-blocks">
+
+          <div class="card-block challenge-block">
+            <span class="block-label">Challenge</span>
+            <p>{{ card.challenge }}</p>
+          </div>
+
+          <div class="card-block solution-block">
+            <span class="block-label">TrackSetu</span>
+            <p>{{ card.solution }}</p>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
