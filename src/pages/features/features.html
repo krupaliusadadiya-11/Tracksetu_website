@@ -1,6 +1,179 @@
-<section class="placeholder-page">
+<section class="features-section">
+
   <div class="container">
-    <h1>Features</h1>
-    <p>This page is coming soon.</p>
+
+    <!-- Section intro -->
+    <header class="features-header">
+
+      <span class="features-eyebrow">
+        FEATURES
+      </span>
+
+      <h2>
+        Every Part of the Shop,
+        <span>in One System.</span>
+      </h2>
+
+      <p>
+        Quotation, order, delivery, payment, purchase and reports —
+        connected in one system for every shop and godown, with each
+        person seeing only the information they are allowed to access.
+      </p>
+
+    </header>
+
+
+    <!-- Feature list -->
+    <div class="features-list">
+
+      <article
+        class="feature-block"
+        *ngFor="let feature of features; let i = index; trackBy: trackByNumber"
+        [class.feature-reverse]="i % 2 !== 0"
+        [id]="feature.id"
+      >
+
+        <!-- Feature content -->
+        <div class="feature-content">
+
+          <div class="feature-number">
+            {{ feature.number }}
+          </div>
+
+          <div class="feature-label">
+            {{ feature.title }}
+          </div>
+
+          <h3>
+            {{ feature.heading }}
+          </h3>
+
+          <p class="feature-description">
+            {{ feature.description }}
+          </p>
+
+          <ul class="feature-points">
+
+            <li
+              *ngFor="let point of feature.points"
+            >
+              <span class="point-icon">
+                <svg
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 10.5 8.2 14 15 6.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <span>
+                {{ point }}
+              </span>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Feature screenshots -->
+        <div class="feature-visual">
+
+          <!-- One screenshot -->
+          <ng-container *ngIf="feature.images.length === 1">
+
+            <div class="screenshot-frame screenshot-single">
+
+              <div class="screenshot-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="screenshot-image">
+                <img
+                  [src]="feature.images[0]"
+                  [alt]="feature.title + ' application screen'"
+                  loading="lazy"
+                />
+              </div>
+
+            </div>
+
+          </ng-container>
+
+
+          <!-- Multiple screenshots -->
+          <ng-container *ngIf="feature.images.length > 1">
+
+            <div class="screenshot-stack">
+
+              <!-- Main screenshot -->
+              <div class="screenshot-frame screenshot-main">
+
+                <div class="screenshot-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <div class="screenshot-image">
+                  <img
+                    [src]="feature.images[0]"
+                    [alt]="feature.title + ' main application screen'"
+                    loading="lazy"
+                  />
+                </div>
+
+              </div>
+
+
+              <!-- Supporting screenshots -->
+              <div class="supporting-screenshots">
+
+                <div
+                  class="screenshot-frame screenshot-small"
+                  *ngFor="
+                    let image of feature.images.slice(1);
+                    trackBy: trackByImage
+                  "
+                >
+
+                  <div class="screenshot-bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                  <div class="screenshot-image">
+                    <img
+                      [src]="image"
+                      [alt]="feature.title + ' supporting application screen'"
+                      loading="lazy"
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </ng-container>
+
+        </div>
+
+      </article>
+
+    </div>
+
   </div>
+
 </section>

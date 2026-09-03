@@ -1,20 +1,66 @@
+
 <section class="how-it-works">
   <div class="container">
+
     <app-section-heading
       appReveal
-      heading="From Quotation to Delivery — Everything Stays Connected"
+      heading="From Quotation to Delivery Everything Stays Connected"
     ></app-section-heading>
 
-    <ol class="workflow">
-      <li class="workflow-step" *ngFor="let step of steps; let i = index" [class.reverse]="i % 2 === 1" appReveal>
-        <div class="step-marker">
-          <span class="step-number">{{ step.number }}</span>
+    <div class="workflow">
+
+      <!-- Sticky visual area -->
+      <div class="workflow-sticky">
+
+        <!-- Background images -->
+        <div
+          class="workflow-background"
+          [style.backgroundImage]="'url(' + activeStep.image + ')'"
+        ></div>
+
+        <!-- Readability overlay -->
+        <div class="workflow-overlay"></div>
+
+        <!-- Main content -->
+        <div class="workflow-content">
+
+          <div class="workflow-copy" appReveal>
+            <span class="workflow-number">
+              {{ activeStep.number }}
+            </span>
+
+            <h3>{{ activeStep.title }}</h3>
+
+            <p>{{ activeStep.description }}</p>
+          </div>
+
+          <!-- Step navigation -->
+          <nav class="workflow-navigation" aria-label="Workflow steps">
+            <button
+              type="button"
+              *ngFor="let step of steps; let i = index"
+              class="workflow-nav-item"
+              [class.active]="i === activeIndex"
+              (click)="setActiveStep(i)"
+            >
+              <span class="nav-number">{{ step.number }}</span>
+              <span class="nav-title">{{ step.title }}</span>
+            </button>
+          </nav>
+
         </div>
-        <div class="step-card">
-          <h4>{{ step.title }}</h4>
-          <p>{{ step.description }}</p>
-        </div>
-      </li>
-    </ol>
+      </div>
+
+      <!-- Invisible scroll zones -->
+      <div class="workflow-scroll-track" aria-hidden="true">
+        <div
+          class="workflow-scroll-step"
+          *ngFor="let step of steps; let i = index"
+          [attr.data-step]="i"
+        ></div>
+      </div>
+
+    </div>
+
   </div>
 </section>

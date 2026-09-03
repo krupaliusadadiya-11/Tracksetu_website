@@ -1,9 +1,602 @@
-.placeholder-page {
+/* =========================================================
+   FEATURES SECTION
+   ========================================================= */
+
+.features-section {
   padding: var(--space-12) 0;
-  text-align: center;
-  min-height: 40vh;
+  background: var(--color-surface);
 }
 
-.placeholder-page p {
-  margin-top: var(--space-2);
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.features-header {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.features-eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+
+  color: var(--color-secondary);
+}
+
+.features-header h2 {
+  max-width: 680px;
+  margin: 0 auto;
+
+  /*
+   * Smaller than the previous version.
+   * Keeps the heading important without dominating the page.
+   */
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+
+  color: var(--color-primary-dark);
+}
+
+.features-header h2 span {
+  color: var(--color-secondary);
+}
+
+.features-header p {
+  max-width: 660px;
+  margin: var(--space-3) auto 0;
+
+  font-size: 16px;
+  line-height: 1.7;
+
+  color: var(--color-text-secondary);
+}
+
+
+/* =========================================================
+   FEATURE LIST
+   ========================================================= */
+
+.features-list {
+  margin-top: var(--space-10);
+}
+
+
+/* =========================================================
+   FEATURE BLOCK
+   ========================================================= */
+
+.feature-block {
+  position: relative;
+
+  display: grid;
+
+  /*
+   * More space for the screenshot.
+   * Previous: 0.9fr / 1.1fr
+   * Now:      0.8fr / 1.2fr
+   */
+  grid-template-columns:
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
+
+  align-items: center;
+
+  gap: clamp(40px, 5vw, 80px);
+
+  min-height: 560px;
+
+  padding: 72px 0;
+
+}
+
+
+
+/* =========================================================
+   ALTERNATING FEATURE LAYOUT
+   ========================================================= */
+
+.feature-block.feature-reverse {
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(0, 0.8fr);
+}
+
+.feature-block.feature-reverse .feature-content {
+  order: 2;
+}
+
+.feature-block.feature-reverse .feature-visual {
+  order: 1;
+}
+
+
+
+
+/* =========================================================
+   FEATURE CONTENT
+   ========================================================= */
+
+.feature-content {
+  max-width: 500px;
+}
+
+.feature-number {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: var(--color-secondary);
+}
+
+.feature-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+
+  color: var(--color-text-muted);
+}
+
+.feature-content h3 {
+  max-width: 500px;
+  margin: 0;
+
+  /*
+   * Reduced heading size.
+   */
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+
+  color: var(--color-primary-dark);
+}
+
+.feature-description {
+  max-width: 500px;
+
+  margin-top: var(--space-3);
+
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: var(--color-text-secondary);
+}
+
+
+/* =========================================================
+   FEATURE POINTS
+   ========================================================= */
+
+.feature-points {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  margin: var(--space-4) 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.feature-points li {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: var(--color-text-primary);
+}
+
+.point-icon {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 21px;
+  height: 21px;
+  margin-top: 1px;
+
+  border-radius: 50%;
+
+  color: var(--color-secondary);
+  background: var(--color-teal-tint);
+}
+
+.point-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+/* =========================================================
+   SCREENSHOT AREA
+   ========================================================= */
+
+.feature-visual {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   SCREENSHOT FRAME
+   ========================================================= */
+
+/*
+ * IMPORTANT:
+ * No box-shadow.
+ *
+ * The screenshot itself should look like a real part
+ * of the product, not like a floating card.
+ */
+
+.screenshot-frame {
+  overflow: hidden;
+
+  width: 100%;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+
+  background: var(--color-surface);
+}
+
+
+/* =========================================================
+   SCREENSHOT TOP BAR
+   ========================================================= */
+
+.screenshot-bar {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  height: 28px;
+  padding: 0 11px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  background: var(--color-background);
+}
+
+.screenshot-bar span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   SCREENSHOT IMAGE
+   ========================================================= */
+
+.screenshot-image {
+  width: 100%;
+  overflow: hidden;
+
+  background: var(--color-surface);
+}
+
+.screenshot-image img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  /*
+   * Do not crop the actual application screenshot.
+   * This keeps the software UI readable.
+   */
+  object-fit: contain;
+}
+
+
+/*
+ * No zoom effect.
+ *
+ * The screenshots contain important UI details,
+ * so we don't want them moving/scaling on hover.
+ */
+
+.screenshot-frame:hover .screenshot-image img {
+  transform: none;
+}
+
+
+/* =========================================================
+   SINGLE SCREENSHOT
+   ========================================================= */
+
+.screenshot-single {
+  width: 100%;
+}
+
+
+/* =========================================================
+   MULTIPLE SCREENSHOTS
+   ========================================================= */
+
+.screenshot-stack {
+  position: relative;
+
+  width: 100%;
+}
+
+
+/*
+ * Main screenshot gets almost all available width.
+ */
+
+.screenshot-main {
+  width: 96%;
+  margin-left: auto;
+}
+
+
+/*
+ * Supporting screenshots sit underneath.
+ */
+
+.supporting-screenshots {
+  position: relative;
+
+  display: flex;
+
+  gap: 14px;
+
+  width: 72%;
+
+  margin-top: -75px;
+  margin-left: 0;
+
+  z-index: 2;
+}
+
+.screenshot-small {
+  width: 50%;
+
+  /*
+   * No shadow.
+   */
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+
+  .features-section {
+    padding: var(--space-10) 0;
+  }
+
+  .features-list {
+    margin-top: var(--space-10);
+  }
+
+  .feature-block,
+  .feature-block.feature-reverse {
+    grid-template-columns: 1fr;
+
+    gap: 44px;
+
+    min-height: auto;
+
+    padding: 64px 0;
+  }
+
+  .feature-block.feature-reverse .feature-content,
+  .feature-block.feature-reverse .feature-visual {
+    order: initial;
+  }
+
+  .feature-content {
+    max-width: 680px;
+  }
+
+  .feature-content h3 {
+    max-width: 650px;
+  }
+
+  .feature-description {
+    max-width: 650px;
+  }
+
+  .feature-visual {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+  }
+
+  .screenshot-main {
+    width: 94%;
+  }
+
+  .supporting-screenshots {
+    width: 74%;
+
+    margin-top: -65px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .features-section {
+    padding: var(--space-8) 0;
+  }
+
+
+  /* -----------------------------------------
+     Header
+     ----------------------------------------- */
+
+  .features-header {
+    text-align: left;
+  }
+
+  .features-header h2 {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+
+    line-height: 1.12;
+  }
+
+  .features-header p {
+    margin-top: var(--space-2);
+
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+
+  /* -----------------------------------------
+     Feature list
+     ----------------------------------------- */
+
+  .features-list {
+    margin-top: var(--space-8);
+  }
+
+
+  /* -----------------------------------------
+     Feature block
+     ----------------------------------------- */
+
+  .feature-block,
+  .feature-block.feature-reverse {
+    grid-template-columns: 1fr;
+
+    gap: 34px;
+
+    padding: 52px 0;
+  }
+
+
+  /* -----------------------------------------
+     Feature content
+     ----------------------------------------- */
+
+  .feature-number {
+    margin-bottom: 7px;
+  }
+
+  .feature-label {
+    margin-bottom: 9px;
+  }
+
+  .feature-content h3 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+
+    line-height: 1.15;
+  }
+
+  .feature-description {
+    margin-top: var(--space-2);
+
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .feature-points {
+    gap: 11px;
+
+    margin-top: var(--space-3);
+  }
+
+  .feature-points li {
+    gap: 9px;
+
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+
+  /* -----------------------------------------
+     Screenshot
+     ----------------------------------------- */
+
+  .screenshot-bar {
+    height: 25px;
+
+    padding: 0 9px;
+  }
+
+  .screenshot-bar span {
+    width: 6px;
+    height: 6px;
+  }
+
+  .screenshot-main {
+    width: 100%;
+  }
+
+  .supporting-screenshots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 94%;
+
+    gap: 9px;
+
+    margin-top: -35px;
+  }
+
+  .screenshot-small {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .feature-block,
+  .feature-block.feature-reverse {
+    padding: 44px 0;
+  }
+
+  .supporting-screenshots {
+    width: 96%;
+
+    margin-top: -25px;
+  }
+
+  .screenshot-frame {
+    border-radius: 10px;
+  }
+
 }

@@ -1,104 +1,288 @@
+/* =========================================================
+   HOW IT WORKS
+   ========================================================= */
+
 .how-it-works {
   padding: var(--space-10) 0;
   background: var(--color-surface);
 }
 
+/* ---------------------------------------------------------
+   Workflow wrapper
+   Normal section height — no artificial scroll distance
+   --------------------------------------------------------- */
+
 .workflow {
-  list-style: none;
-  margin: var(--space-8) auto 0;
-  padding: 0;
-  max-width: 900px;
   position: relative;
+  margin-top: var(--space-8);
 }
 
-.workflow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  background: linear-gradient(180deg, var(--color-accent), var(--color-secondary), var(--color-primary));
-  transform: translateX(-1px);
-}
+/* ---------------------------------------------------------
+   Sticky viewport
+   --------------------------------------------------------- */
 
-.workflow-step {
+.workflow-sticky {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 56px 1fr;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-}
+  height: 70vh;
+  min-height: 500px;
 
-.step-marker {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  box-shadow: 0 0 0 6px var(--color-surface);
-  z-index: 1;
-  justify-self: center;
-}
-
-.step-number {
-  color: var(--color-surface);
-  font-weight: 700;
-  font-size: var(--font-size-small);
-}
-
-.step-card {
-  grid-column: 1;
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
+  overflow: hidden;
   border-radius: var(--radius-card);
-  padding: var(--space-3);
-  justify-self: end;
-  max-width: 380px;
-  transition: box-shadow var(--motion-base), border-color var(--motion-base);
+  isolation: isolate;
 }
 
-.step-card:hover {
-  box-shadow: var(--shadow-card);
-  border-color: var(--color-accent);
+/* ---------------------------------------------------------
+   Background
+   --------------------------------------------------------- */
+
+.workflow-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transition:
+    opacity 500ms ease,
+    transform 900ms ease;
+
+  transform: scale(1.02);
 }
 
-.step-card h4 {
-  margin-bottom: 4px;
+/* ---------------------------------------------------------
+   Dark overlay
+   --------------------------------------------------------- */
+
+.workflow-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.64) 38%,
+      rgba(0, 0, 0, 0.28) 70%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
 }
 
-.step-card p {
+/* ---------------------------------------------------------
+   Content
+   --------------------------------------------------------- */
+
+.workflow-content {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: clamp(32px, 6vw, 80px);
+}
+
+/* ---------------------------------------------------------
+   Text
+   --------------------------------------------------------- */
+
+.workflow-copy {
+  max-width: 560px;
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  color: #fff;
+}
+
+.workflow-number {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 12px;
+
   font-size: var(--font-size-small);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  opacity: 0.75;
 }
 
-.workflow-step.reverse .step-card {
-  grid-column: 3;
-  justify-self: start;
+.workflow-copy h3 {
+  margin: 0 0 16px;
+
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.05;
+
+  color: #fff;
 }
+
+.workflow-copy p {
+  max-width: 520px;
+
+  margin: 0;
+
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ---------------------------------------------------------
+   Bottom navigation
+   --------------------------------------------------------- */
+
+.workflow-navigation {
+  display: flex;
+  align-items: stretch;
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  padding-top: 24px;
+
+  scrollbar-width: none;
+}
+
+.workflow-navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.workflow-nav-item {
+  position: relative;
+
+  flex: 1 0 auto;
+  min-width: 120px;
+
+  padding: 14px 16px;
+
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    color 250ms ease,
+    border-color 250ms ease,
+    background 250ms ease;
+}
+
+.workflow-nav-item:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.workflow-nav-item.active {
+  color: #fff;
+
+  border-top-color: #fff;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-number {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.nav-title {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
 
 @media (max-width: 1023px) {
-  .workflow::before {
-    left: 24px;
+
+  .workflow-sticky {
+    min-height: 560px;
   }
 
-  .workflow-step,
-  .workflow-step.reverse {
-    grid-template-columns: 48px 1fr;
-    gap: var(--space-2);
+  .workflow-content {
+    padding: 40px;
   }
 
-  .step-marker {
-    grid-column: 1;
+  .workflow-copy {
+    max-width: 520px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+  .how-it-works {
+    padding: var(--space-8) 0;
   }
 
-  .step-card,
-  .workflow-step.reverse .step-card {
-    grid-column: 2;
-    justify-self: stretch;
-    max-width: 100%;
+  .workflow-sticky {
+    height: 100svh;
+    min-height: 520px;
+
+    border-radius: var(--radius-card);
+  }
+
+  .workflow-content {
+    padding: 28px 20px 20px;
+  }
+
+  .workflow-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.68) 0%,
+        rgba(0, 0, 0, 0.48) 45%,
+        rgba(0, 0, 0, 0.82) 100%
+      );
+  }
+
+  .workflow-copy {
+    margin-top: 20%;
+    margin-bottom: auto;
+  }
+
+  .workflow-copy h3 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .workflow-copy p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .workflow-navigation {
+    margin-left: -20px;
+    margin-right: -20px;
+
+    width: calc(100% + 40px);
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .workflow-nav-item {
+    min-width: 105px;
+    padding: 12px;
   }
 }
