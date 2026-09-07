@@ -1,20 +1,8 @@
 .final-cta {
   padding: var(--space-10) 0;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  position: relative;
-  overflow: hidden;
-}
-
-.final-cta::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 85% 20%, rgba(0, 184, 181, 0.28), transparent 55%);
 }
 
 .final-cta-inner {
-  position: relative;
-  z-index: 1;
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
@@ -22,10 +10,6 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-3);
-}
-
-.final-cta-inner h2 {
-  color: var(--color-surface);
 }
 
 /* Masked slide-up heading reveal, triggered by the ancestor's [appReveal] class */
@@ -64,7 +48,8 @@
 }
 
 .final-cta-inner .supporting {
-  color: rgba(255, 255, 255, 0.82);
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
 }
 
 .final-cta-inner app-button {

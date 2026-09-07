@@ -2,8 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 .brand-logo {
   width: 40px;
@@ -26,7 +26,7 @@
   gap: 10px;
   font-weight: 700;
   font-size: 20px;
-  color: var(--color-primary);
+  color: var(--color-surface);
   flex-shrink: 0;
 }
 
@@ -56,7 +56,7 @@
 .nav-links a {
   font-size: var(--font-size-small);
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   padding: 8px 0;
   border-bottom: 2px solid transparent;
   transition: color var(--motion-fast), border-color var(--motion-fast);
@@ -64,7 +64,7 @@
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-primary);
+  color: var(--color-surface);
 }
 
 .nav-links a.active {
@@ -88,9 +88,9 @@
   gap: 5px;
   width: 40px;
   height: 40px;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-control);
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.12);
   cursor: pointer;
 }
 
@@ -99,7 +99,7 @@
   width: 18px;
   height: 2px;
   margin: 0 auto;
-  background: var(--color-primary);
+  background: var(--color-surface);
   border-radius: 1px;
 }
 
@@ -124,8 +124,8 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
+    background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     box-shadow: var(--shadow-card);
     max-height: 0;
     overflow: hidden;
@@ -138,11 +138,11 @@
 
   .nav-links a {
     padding: var(--space-2) var(--container-pad-tablet);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   }
 
   .nav-links a.active {
-    background: var(--color-background);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .mobile-cta {

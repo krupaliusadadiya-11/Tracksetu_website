@@ -3,7 +3,6 @@
   background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
   padding: var(--space-12) 0;
   overflow: hidden;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .hero-inner {
@@ -302,13 +301,16 @@
 }
 
 /* ==========================================================================
-   Sequential entrance animation, 5 strict steps with no overlap — each stage
+   Sequential entrance animation, 6 strict steps with no overlap — each stage
    starts the instant the previous one finishes:
-     1. heading (masked slide-up, line by line)
-     2. supporting text + CTA buttons
-     3. product visual
-     4. the 3 orbit rings
-     5. icons, one by one
+     1. heading (masked slide-up, line by line)      0ms    - 460ms
+     2. supporting text + CTA buttons                460ms  - 850ms
+     3. product visual                                850ms  - 1300ms
+     4. the 3 orbit rings fade in                     1300ms - 1600ms
+     5. rings spin                                    1600ms - 1900ms
+     6. icons, one by one                             1900ms - 2490ms
+   Total runtime ~2.5s. Same sequence, same keyframes, same visual style as
+   before — only durations/delays were shortened and tightened.
 
    Runs once on load (not scroll-triggered), so it's plain CSS with cumulative
    animation-delay values rather than the site-wide scroll [appReveal]
@@ -316,7 +318,7 @@
 
    Ring note: rings are faded in via opacity on .ring-svg only (not the outer
    .hero-ring container, which also holds the icons) — an ancestor's opacity
-   would otherwise mask the icons' own independent step-5 reveal. This also
+   would otherwise mask the icons' own independent step-6 reveal. This also
    replaces an earlier stroke-dashoffset "draw-in" attempt that didn't work:
    dashoffset only slides a *repeating* dash pattern along the path, it can't
    hide it, so the dots were visible from the very first frame.
@@ -384,7 +386,7 @@
   }
 }
 
-/* Step 1 (0ms-980ms): heading reveals line by line, masked slide-up */
+/* Step 1 (0ms-460ms): heading reveals line by line, masked slide-up */
 .hero-heading .reveal-heading-mask {
   overflow: hidden;
   display: block;
@@ -394,7 +396,7 @@
   display: block;
   transform: translateY(100%);
   opacity: 0;
-  animation: heroHeadingLineIn 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroHeadingLineIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-heading .hero-line-1 {
@@ -402,94 +404,94 @@
 }
 
 .hero-heading .hero-line-2 {
-  animation-delay: 130ms;
+  animation-delay: 80ms;
 }
 
 .text-highlight {
   color: var(--color-secondary);
 }
 
-/* Step 2 (980ms-1640ms): supporting text, then buttons, starting the instant step 1 ends */
+/* Step 2 (460ms-850ms): supporting text, then buttons, starting the instant step 1 ends */
 .hero-content .hero-text {
   opacity: 0;
-  animation: heroFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroFadeUp 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-content .hero-text:nth-of-type(1) {
-  animation-delay: 980ms;
+  animation-delay: 460ms;
 }
 
 .hero-content .hero-text:nth-of-type(2) {
-  animation-delay: 1080ms;
+  animation-delay: 540ms;
 }
 
 .hero-content .hero-actions {
   opacity: 0;
-  animation: heroFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) 1180ms both;
+  animation: heroFadeUp 230ms cubic-bezier(0.22, 1, 0.36, 1) 620ms both;
 }
 
-/* Step 3 (1730ms-2430ms): product visual, starting the instant step 2 ends */
+/* Step 3 (850ms-1300ms): product visual, starting the instant step 2 ends */
 .hero-visual {
   opacity: 0;
-  animation: heroVisualIn 700ms cubic-bezier(0.22, 1, 0.36, 1) 1730ms both;
+  animation: heroVisualIn 450ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both;
 }
 
-/* Step 4 (2430ms-3110ms): the 3 rings fade in, small stagger between rings.
+/* Step 4 (1300ms-1600ms): the 3 rings fade in, small stagger between rings.
    Each ring is 4 <path> elements (2 accent + 2 base-fill) in DOM order, so
    nth-child groups them without needing extra classes or touching geometry. */
 .ring-svg path {
   opacity: 0;
-  animation: heroRingIn 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroRingIn 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .ring-svg path:nth-child(-n + 4) {
-  animation-delay: 2430ms;
+  animation-delay: 1300ms;
 }
 
 .ring-svg path:nth-child(n + 5):nth-child(-n + 8) {
-  animation-delay: 2520ms;
+  animation-delay: 1340ms;
 }
 
 .ring-svg path:nth-child(n + 9) {
-  animation-delay: 2610ms;
+  animation-delay: 1380ms;
 }
 
-/* Ring spin (3110ms-3810ms): once all 3 rings have faded in, they spin a full turn as a
+/* Step 5 (1600ms-1900ms): once all 3 rings have faded in, they spin a full turn as a
    flourish before the icons appear. A full 360deg returns the dash pattern to its exact
    starting look, so the "settled" ring afterwards is pixel-identical to right after step 4. */
 .ring-svg {
   transform-origin: 50% 50%;
-  animation: heroRingSpin 700ms cubic-bezier(0.22, 1, 0.36, 1) 3110ms both;
+  animation: heroRingSpin 300ms cubic-bezier(0.22, 1, 0.36, 1) 1600ms both;
 }
 
-/* Step 5 (3810ms-4560ms): icons reveal one by one, starting the instant the ring spin ends */
+/* Step 6 (1900ms-2490ms): icons reveal one by one, starting the instant the ring spin ends */
 .hero-icon {
   opacity: 0;
-  animation: heroIconIn 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroIconIn 190ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .icon-cloud {
-  animation-delay: 3810ms;
+  animation-delay: 1900ms;
 }
 
 .icon-database {
-  animation-delay: 3900ms;
+  animation-delay: 1980ms;
 }
 
 .icon-security {
-  animation-delay: 3990ms;
+  animation-delay: 2060ms;
 }
 
 .icon-analytics {
-  animation-delay: 4080ms;
+  animation-delay: 2140ms;
 }
 
 .icon-integrations {
-  animation-delay: 4170ms;
+  animation-delay: 2220ms;
 }
 
 .icon-automation {
-  animation-delay: 4260ms;
+  animation-delay: 2300ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

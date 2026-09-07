@@ -19,4 +19,5 @@ export class ButtonComponent {
   @Input() href?: string;
   @Input() type: 'button' | 'submit' = 'button';
   @Input() ariaLabel?: string;
+  @Input() disabled = false;
 }

@@ -1,0 +1,211 @@
+.faq {
+  padding: var(--space-10) 0;
+  background: var(--color-background);
+}
+
+.faq-layout {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ---------------------------------------------------------------- */
+/* Left card                                                         */
+/* ---------------------------------------------------------------- */
+
+.faq-card {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4);
+  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-surface);
+}
+
+.faq-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-surface);
+  margin-bottom: var(--space-1);
+}
+
+.faq-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.faq-card h3 {
+  color: var(--color-surface);
+}
+
+.faq-card-text {
+  font-size: var(--font-size-body);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.faq-highlights {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.faq-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.faq-highlights svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--color-surface);
+}
+
+.faq-card app-button {
+  margin-top: var(--space-2);
+  align-self: flex-start;
+}
+
+/* ---------------------------------------------------------------- */
+/* Right accordion                                                   */
+/* ---------------------------------------------------------------- */
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: box-shadow var(--motion-base), border-color var(--motion-base);
+}
+
+.faq-item.open {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-card);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.faq-number {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--color-teal-tint);
+  color: var(--color-secondary);
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+
+.faq-item.open .faq-number {
+  background: var(--color-secondary);
+  color: var(--color-surface);
+}
+
+.faq-question h3 {
+  flex: 1;
+  margin: 0;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+  transition: transform var(--motion-fast), color var(--motion-fast);
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--color-secondary);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--motion-slow);
+}
+
+.faq-item.open .faq-answer {
+  max-height: 400px;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding: 0 var(--space-3) var(--space-3) 60px;
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer {
+    transition: none;
+  }
+
+  .faq-chevron {
+    transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-card {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-answer p {
+    padding-left: var(--space-3);
+  }
+}

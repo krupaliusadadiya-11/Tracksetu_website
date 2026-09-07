@@ -9,6 +9,7 @@ interface Industry {
   icon: IndustryIcon;
   name: string;
   description: string;
+  image: string;
 }
 
 @Component({
@@ -24,21 +25,25 @@ export class WhoIsItForSection {
       icon: 'tiles',
       name: 'Tiles',
       description: 'Manage quotations, customer orders, purchasing and stock.',
+      image: 'images/industry/tile_shop.jpg',
     },
     {
       icon: 'sanitary',
       name: 'Sanitary',
       description: 'Connect sales, purchasing, inventory and delivery operations.',
+      image: 'images/industry/sanitary_shop.jpg',
     },
     {
       icon: 'hardware',
       name: 'Hardware',
       description: 'Manage products, customer orders, stock and purchasing requirements.',
+      image: 'images/industry/hardware_shop.jpg',
     },
     {
       icon: 'wholesale',
       name: 'Wholesale',
       description: 'Handle customer orders, purchasing requirements, inventory and multi-location operations.',
+      image: 'images/industry/wholesale_shop.jpg',
     },
   ];
 }

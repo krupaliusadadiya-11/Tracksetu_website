@@ -13,6 +13,7 @@
 .multi-shop-content {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-3);
 }
 
@@ -91,5 +92,449 @@
 
   .multi-shop-visual {
     order: -1;
+  }
+}
+/* =========================================================
+   TRACKSETU LOCATION NETWORK
+   Lightweight CSS + SVG only
+   ========================================================= */
+
+.multi-shop-visual {
+  width: 100%;
+}
+
+.location-network {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  aspect-ratio: 600 / 440;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------
+   Background orbit
+   --------------------------------------------------------- */
+
+.network-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(45, 140, 255, 0.10);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.orbit-1 {
+  width: 88%;
+  aspect-ratio: 1;
+}
+
+.orbit-2 {
+  width: 64%;
+  aspect-ratio: 1;
+  border-color: rgba(0, 212, 255, 0.10);
+}
+
+/* ---------------------------------------------------------
+   Connections
+   --------------------------------------------------------- */
+
+.network-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 1;
+}
+
+.network-lines path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  opacity: 0.55;
+  stroke-linecap: round;
+
+  stroke-dasharray: 7 8;
+
+  animation: connectionFlow 4s linear infinite;
+}
+
+.network-lines circle {
+  fill: var(--color-surface);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+@keyframes connectionFlow {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+/* ---------------------------------------------------------
+   Center TrackSetu
+   --------------------------------------------------------- */
+
+.network-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 150px;
+  height: 150px;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(45, 140, 255, 0.18);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 10px rgba(45, 140, 255, 0.04),
+    0 0 45px rgba(0, 212, 255, 0.18),
+    0 18px 45px rgba(10, 50, 90, 0.12);
+
+  z-index: 3;
+}
+
+/* subtle cyan glow behind hub */
+
+.hub-glow {
+  position: absolute;
+  inset: -25px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 0.12),
+    transparent 68%
+  );
+  z-index: -1;
+}
+
+.hub-logo {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  background: white;
+
+  box-shadow: 0 6px 20px rgba(10, 50, 90, 0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.network-hub strong {
+  margin-top: 6px;
+  font-size: 17px;
+  color: var(--color-primary-dark);
+}
+
+.network-hub small {
+  margin-top: 2px;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------
+   Location Cards
+   --------------------------------------------------------- */
+
+.location-node {
+  position: absolute;
+
+  width: 185px;
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 10px 13px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(45, 140, 255, 0.16);
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 12px 30px rgba(20, 70, 110, 0.08);
+
+  backdrop-filter: blur(8px);
+
+  z-index: 4;
+
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.location-node:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 35px rgba(20, 70, 110, 0.13);
+}
+
+/* ---------------------------------------------------------
+   Location positions
+   --------------------------------------------------------- */
+
+.node-shop-a {
+  top: 0%;
+  left: 0;
+}
+
+.node-shop-b {
+  top: 0%;
+  right: 0;
+}
+
+.node-godown-1 {
+  bottom: 0%;
+  left: 0;
+}
+
+.node-godown-2 {
+  bottom: 0%;
+  right: 0;
+}
+
+/* ---------------------------------------------------------
+   Location image
+   --------------------------------------------------------- */
+
+.node-image {
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #eef5f9;
+}
+
+.node-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   Location information
+   --------------------------------------------------------- */
+
+.node-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.node-info strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.node-info small {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* Online indicator */
+
+.node-status {
+  position: absolute;
+
+  top: 9px;
+  right: 9px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--color-success);
+
+  box-shadow: 0 0 8px rgba(0, 200, 150, 0.4);
+}
+
+/* ---------------------------------------------------------
+   Reveal animation
+   --------------------------------------------------------- */
+
+.multi-shop-visual .location-node,
+.multi-shop-visual .network-hub {
+  opacity: 0;
+}
+
+.multi-shop-visual.reveal-visible .location-node {
+  animation: locationIn 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.multi-shop-visual.reveal-visible .network-hub {
+  animation: hubIn 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.node-shop-a {
+  animation-delay: 100ms;
+}
+
+.node-shop-b {
+  animation-delay: 180ms;
+}
+
+.node-godown-1 {
+  animation-delay: 260ms;
+}
+
+.node-godown-2 {
+  animation-delay: 340ms;
+}
+
+@keyframes locationIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hubIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .multi-shop-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .multi-shop-content {
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .multi-shop-visual {
+    order: -1;
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 639px) {
+
+  .location-network {
+    max-width: 390px;
+    aspect-ratio: 600 / 500;
+  }
+
+  .network-hub {
+    width: 115px;
+    height: 115px;
+  }
+
+  .hub-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .network-hub strong {
+    font-size: 14px;
+  }
+
+  .network-hub small {
+    font-size: 7px;
+  }
+
+  .location-node {
+    width: 145px;
+    min-height: 64px;
+    padding: 7px 9px;
+    gap: 8px;
+    border-radius: 13px;
+  }
+
+  .node-image {
+    width: 43px;
+    height: 43px;
+    border-radius: 9px;
+  }
+
+  .node-info strong {
+    font-size: 12px;
+  }
+
+  .node-info small {
+    font-size: 10px;
+  }
+
+  .node-shop-a,
+  .node-shop-b {
+    top: 3%;
+  }
+
+  .node-godown-1,
+  .node-godown-2 {
+    bottom: 3%;
+  }
+}
+
+/* ---------------------------------------------------------
+   Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .network-lines path {
+    animation: none;
+  }
+
+  .location-node,
+  .network-hub {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }

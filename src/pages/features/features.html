@@ -1,27 +1,95 @@
-<section class="features-section">
+<section class="features-hero">
+
+  <!-- Shared pill template, reused for every marquee row so the 14-icon
+       switch is only written once -->
+  <ng-template #pillTpl let-item>
+    <span class="feature-pill">
+      <span class="pill-icon" [ngSwitch]="item.icon">
+        <svg *ngSwitchCase="'quotation'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+        <svg *ngSwitchCase="'order'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <svg *ngSwitchCase="'purchase'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"></circle><circle cx="18" cy="20" r="1.3"></circle><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.8h7.6a2 2 0 0 0 2-1.6L21 8H6"></path></svg>
+        <svg *ngSwitchCase="'stock'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path></svg>
+        <svg *ngSwitchCase="'alert'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 12 6 8z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg>
+        <svg *ngSwitchCase="'delivery'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="13" height="9" rx="1"></rect><path d="M14 10h4l3 3v3h-7z"></path><circle cx="6" cy="18" r="1.6"></circle><circle cx="17" cy="18" r="1.6"></circle></svg>
+        <svg *ngSwitchCase="'payment'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg>
+        <svg *ngSwitchCase="'customer'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        <svg *ngSwitchCase="'product'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8-9-9V3h8l9 9z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg>
+        <svg *ngSwitchCase="'qr'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"></path></svg>
+        <svg *ngSwitchCase="'pdf'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M12 8v6"></path><path d="M9 11l3 3 3-3"></path></svg>
+        <svg *ngSwitchCase="'sales'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
+        <svg *ngSwitchCase="'dashboard'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+        <svg *ngSwitchCase="'discount'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"></circle><circle cx="17" cy="17" r="2.5"></circle><path d="M6 18L18 6"></path></svg>
+      </span>
+      <span>{{ item.label }}</span>
+    </span>
+  </ng-template>
+
+  <!-- Background marquee: decorative, not part of the reading order -->
+  <div class="features-hero-marquee" aria-hidden="true">
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <ng-container *ngFor="let item of marqueeRows[0]">
+          <ng-container *ngTemplateOutlet="pillTpl; context: { $implicit: item }"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="marquee-row marquee-right">
+      <div class="marquee-track">
+        <ng-container *ngFor="let item of marqueeRows[1]">
+          <ng-container *ngTemplateOutlet="pillTpl; context: { $implicit: item }"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <ng-container *ngFor="let item of marqueeRows[2]">
+          <ng-container *ngTemplateOutlet="pillTpl; context: { $implicit: item }"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="marquee-row marquee-right">
+      <div class="marquee-track">
+        <ng-container *ngFor="let item of marqueeRows[3]">
+          <ng-container *ngTemplateOutlet="pillTpl; context: { $implicit: item }"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soft central fade so the marquee stays visible at the edges but clears up behind the heading -->
+  <div class="features-hero-fade" aria-hidden="true"></div>
 
   <div class="container">
 
-    <!-- Section intro -->
+    <!-- Section intro: plays once on load, same staged sequence and timing as the Home hero -->
     <header class="features-header">
 
-      <span class="features-eyebrow">
-        FEATURES
-      </span>
-
-      <h2>
-        Every Part of the Shop,
-        <span>in One System.</span>
+      <h2 class="features-heading">
+        <span class="reveal-heading-mask"><span class="reveal-heading-line features-line-1"><span class="highlight">Everything you need</span></span></span>
+        <span class="reveal-heading-mask"><span class="reveal-heading-line features-line-2">to manage your business, smarter</span></span>
       </h2>
 
-      <p>
-        Quotation, order, delivery, payment, purchase and reports —
-        connected in one system for every shop and godown, with each
-        person seeing only the information they are allowed to access.
+      <p class="features-fade-up features-text">
+        TrackSetu brings quotations, orders, purchases, inventory, deliveries,
+        payments, and business alerts together in one connected workflow.
       </p>
 
-    </header>
+      <div class="features-actions features-fade-up">
+        <app-button variant="primary" size="lg" routerLink="/book-a-demo">
+          Book a Demo
+        </app-button>
+        <app-button variant="secondary" size="lg" href="/#video" ariaLabel="Watch the video">
+          Watch the Video
+        </app-button>
+      </div>
 
+    </header>
+  </div>
+</section>
+
+<section class="features-section">
+
+  <div class="container">
 
     <!-- Feature list -->
     <div class="features-list">
@@ -31,9 +99,13 @@
         *ngFor="let feature of features; let i = index; trackBy: trackByNumber"
         [class.feature-reverse]="i % 2 !== 0"
         [id]="feature.id"
+        appReveal
       >
 
-        <!-- Feature content -->
+        <!-- Feature content: slides in from whichever side it's actually
+             on (left normally, right when .feature-reverse swaps sides).
+             appReveal sits on the whole block so both sides trigger from
+             a single "the user reached this block" moment. -->
         <div class="feature-content">
 
           <div class="feature-number">
@@ -83,7 +155,8 @@
         </div>
 
 
-        <!-- Feature screenshots -->
+        <!-- Feature screenshots: slides in from the opposite side of
+             feature-content -->
         <div class="feature-visual">
 
           <!-- One screenshot -->
@@ -101,7 +174,7 @@
                 <img
                   [src]="feature.images[0]"
                   [alt]="feature.title + ' application screen'"
-                  loading="lazy"
+                  loading="eager"
                 />
               </div>
 
@@ -128,7 +201,7 @@
                   <img
                     [src]="feature.images[0]"
                     [alt]="feature.title + ' main application screen'"
-                    loading="lazy"
+                    loading="eager"
                   />
                 </div>
 
@@ -156,7 +229,7 @@
                     <img
                       [src]="image"
                       [alt]="feature.title + ' supporting application screen'"
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
 
@@ -175,5 +248,5 @@
     </div>
 
   </div>
-
+<app-final-cta-section></app-final-cta-section>
 </section>

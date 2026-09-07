@@ -26,6 +26,7 @@
   <button
     class="btn btn-{{ variant }} btn-{{ size }}"
     [type]="type"
+    [disabled]="disabled"
     [attr.aria-label]="ariaLabel || null"
   >
     <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>

@@ -1,6 +1,169 @@
-<section class="placeholder-page">
+<!-- 95-second product preview: copy on one side, video on the other -->
+<section class="demo-video">
+  <div class="container demo-video-inner">
+    <div class="demo-video-copy" appReveal>
+      <span class="eyebrow">Product Walkthrough</span>
+      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Before the Demo, See the Workflow in 95 Seconds</span></h2>
+      <p class="supporting">
+        Get a quick overview of the TrackSetu workflow before speaking with the team.
+      </p>
+    </div>
+
+    <div class="demo-video-frame" appReveal [revealDelay]="120">
+      <video
+        *ngIf="videoAvailable; else placeholder"
+        [src]="videoSrc"
+        controls
+        preload="metadata"
+        aria-label="TrackSetu 95 second product walkthrough"
+      ></video>
+
+      <ng-template #placeholder>
+        <div class="video-placeholder" role="img" aria-label="TrackSetu product walkthrough video placeholder">
+          <button class="play-button" type="button" aria-label="Watch the video">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5.5v13l11-6.5-11-6.5z"></path>
+            </svg>
+          </button>
+          <span class="duration-badge">95 sec</span>
+          <span class="placeholder-label">Video coming soon</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+<!-- Demo form -->
+<section class="demo-form-section" id="demo-form">
   <div class="container">
-    <h1>Book a Demo</h1>
-    <p>This page is coming soon.</p>
+    <app-section-heading
+      appReveal
+      heading="Tell Us About Your Business"
+      supporting="Share a few details so the TrackSetu team can understand your business structure and prepare a relevant demo."
+    ></app-section-heading>
+
+    <div class="demo-form-card" appReveal [revealDelay]="120">
+
+      <!-- Success state, shown after submit instead of the form -->
+      <div class="demo-success" *ngIf="submitted()">
+        <span class="demo-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+        </span>
+        <h3>Thank you.</h3>
+        <p>
+          Your demo request has been received. Our team will review your details
+          and contact you using the information provided.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form *ngIf="!submitted()" class="demo-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              placeholder="Your full name"
+              [class.invalid]="isInvalid('fullName')"
+            />
+            <span class="field-error" *ngIf="isInvalid('fullName')">Please enter your full name.</span>
+          </div>
+
+          <div class="form-field">
+            <label for="businessName">Business Name <span class="required">*</span></label>
+            <input
+              id="businessName"
+              type="text"
+              formControlName="businessName"
+              placeholder="Your business name"
+              [class.invalid]="isInvalid('businessName')"
+            />
+            <span class="field-error" *ngIf="isInvalid('businessName')">Please enter your business name.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              placeholder="e.g. 98765 43210"
+              [class.invalid]="isInvalid('phone')"
+            />
+            <span class="field-error" *ngIf="isInvalid('phone')">Please enter a valid phone number.</span>
+          </div>
+
+          <div class="form-field">
+            <label for="shopCount">Number of Shops / Branches <span class="required">*</span></label>
+            <input
+              id="shopCount"
+              type="number"
+              min="1"
+              formControlName="shopCount"
+              placeholder="e.g. 3"
+              [class.invalid]="isInvalid('shopCount')"
+            />
+            <span class="field-error" *ngIf="isInvalid('shopCount')">Please enter the number of locations.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <span class="form-field-label">WhatsApp Available? <span class="required">*</span></span>
+            <div class="toggle-group" role="radiogroup" aria-label="WhatsApp available">
+              <label class="toggle-option">
+                <input type="radio" formControlName="whatsapp" value="yes" />
+                <span>Yes</span>
+              </label>
+              <label class="toggle-option">
+                <input type="radio" formControlName="whatsapp" value="no" />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="businessType">Business Type <span class="required">*</span></label>
+            <select
+              id="businessType"
+              formControlName="businessType"
+              [class.invalid]="isInvalid('businessType')"
+            >
+              <option value="" disabled>Select business type</option>
+              <option *ngFor="let type of businessTypes" [value]="type.value">{{ type.label }}</option>
+            </select>
+            <span class="field-error" *ngIf="isInvalid('businessType')">Please select your business type.</span>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="message">Message <span class="optional">(optional)</span></label>
+          <textarea
+            id="message"
+            formControlName="message"
+            rows="4"
+            placeholder="Anything specific you'd like us to know?"
+          ></textarea>
+        </div>
+
+        <app-button
+          class="demo-submit"
+          type="submit"
+          variant="primary"
+          size="lg"
+          [disabled]="form.invalid || submitting()"
+        >
+          {{ submitting() ? 'Sending...' : 'Request a Demo' }}
+        </app-button>
+
+      </form>
+    </div>
   </div>
 </section>

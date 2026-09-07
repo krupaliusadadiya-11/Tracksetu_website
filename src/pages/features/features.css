@@ -2,9 +2,120 @@
    FEATURES SECTION
    ========================================================= */
 
+/*
+ * Height is content-based (no forced min-height) so the hero doesn't
+ * spill past the viewport — same padding treatment as the Home hero, with
+ * a little extra top padding on top of that.
+ */
+.features-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--space-12) + var(--space-3)) 0 var(--space-12);
+  background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
+  overflow: hidden;
+}
+
+.features-hero .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------- */
+/* Background marquee — decorative feature pills, grouped above and  */
+/* below the center content so the middle stays clear for the        */
+/* heading. Each row's data is pre-doubled in the component, so a     */
+/* -50% translateX loops with no visible seam.                       */
+/* ---------------------------------------------------------------- */
+
+.features-hero-marquee {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.marquee-row {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: var(--space-3);
+  animation: marqueeScroll 48s linear infinite;
+}
+
+.marquee-row.marquee-right .marquee-track {
+  animation-direction: reverse;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.feature-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--color-border);
+  /* box-shadow: var(--shadow-card); */
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pill-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-secondary);
+}
+
+.pill-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Soft central fade so the marquee stays visible near the left/right edges
+   of the section but clears up directly behind the heading, text and CTAs.
+   Narrow horizontally (on purpose) so it only covers the text column,
+   not the pills sitting further out toward the edges. */
+.features-hero-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(38% 62% at 50% 50%, var(--color-background) 0%, var(--color-background) 40%, rgba(245, 249, 252, 0.55) 62%, rgba(245, 249, 252, 0) 82%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
 .features-section {
-  padding: var(--space-12) 0;
+  padding: var(--space-10) 0;
   background: var(--color-surface);
+  /* Contains the feature-content/feature-visual reveal's pre-animation
+     translateX offset so it can't push the page into horizontal scroll. */
+  overflow-x: hidden;
 }
 
 
@@ -18,44 +129,114 @@
   text-align: center;
 }
 
-.features-eyebrow {
-  display: inline-block;
-  margin-bottom: var(--space-2);
-
-  font-size: var(--font-size-small);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-
-  color: var(--color-secondary);
-}
-
-.features-header h2 {
-  max-width: 680px;
+.features-heading {
   margin: 0 auto;
 
-  /*
-   * Smaller than the previous version.
-   * Keeps the heading important without dominating the page.
-   */
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-  line-height: 1.12;
+  /* Matches Hero's h1 scale, so this intro reads at the same weight as the Home hero.
+     line-height is a touch taller than Hero's 1.12 because this heading's first line
+     wraps to two physical lines at normal widths (Hero's never wraps), and 1.12 was
+     tight enough to clip descenders (e.g. the "g" in "manage"). */
+  font-size: var(--font-size-h1);
+  line-height: 1.22;
   letter-spacing: -0.025em;
 
   color: var(--color-primary-dark);
 }
 
-.features-header h2 span {
+.features-heading .highlight {
   color: var(--color-secondary);
 }
 
-.features-header p {
-  max-width: 660px;
+.features-text {
+  max-width: 560px;
   margin: var(--space-3) auto 0;
 
-  font-size: 16px;
+  font-size: var(--font-size-body);
   line-height: 1.7;
 
   color: var(--color-text-secondary);
+}
+
+.features-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* ---------------------------------------------------------------- */
+/* Staged entrance — plays once on load, same keyframes/timing/      */
+/* easing as the Home hero's own sequence (this block is always in   */
+/* the initial viewport too, so it doesn't use the scroll [appReveal]*/
+/* directive used elsewhere on this page).                           */
+/* ---------------------------------------------------------------- */
+
+@keyframes featuresHeadingLineIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes featuresFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Step 1 (0ms-460ms): heading reveals line by line, masked slide-up */
+.features-heading .reveal-heading-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.features-heading .reveal-heading-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  animation: featuresHeadingLineIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.features-heading .features-line-1 {
+  animation-delay: 0ms;
+}
+
+.features-heading .features-line-2 {
+  animation-delay: 100ms;
+}
+
+/* Step 2 (460ms-850ms): supporting text, then buttons */
+.features-fade-up {
+  opacity: 0;
+  animation: featuresFadeUp 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.features-text.features-fade-up {
+  animation-delay: 560ms;
+}
+
+.features-actions.features-fade-up {
+  animation-duration: 330ms;
+  animation-delay: 720ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .features-heading .reveal-heading-line,
+  .features-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 
@@ -63,9 +244,6 @@
    FEATURE LIST
    ========================================================= */
 
-.features-list {
-  margin-top: var(--space-10);
-}
 
 
 /* =========================================================
@@ -83,12 +261,13 @@
    * Now:      0.8fr / 1.2fr
    */
   grid-template-columns:
-    minmax(0, 0.8fr)
-    minmax(0, 1.2fr);
+    minmax(0, 1.2fr)
+    minmax(0, 0.8fr);
 
   align-items: center;
 
-  gap: clamp(40px, 5vw, 80px);
+  gap: clamp(40px, 5vw, 60px);
+  /* gap:60px; */
 
   min-height: 560px;
 
@@ -104,7 +283,7 @@
 
 .feature-block.feature-reverse {
   grid-template-columns:
-    minmax(0, 1.2fr)
+    minmax(0, 1fr)
     minmax(0, 0.8fr);
 }
 
@@ -116,6 +295,59 @@
   order: 1;
 }
 
+/* ---------------------------------------------------------------- */
+/* Converging reveal: content and image slide in from the side they  */
+/* actually sit on — content from the left, image from the right by  */
+/* default; flipped on .feature-reverse rows, where the layout swaps */
+/* sides via `order` above.                                          */
+/*                                                                    */
+/* [appReveal] sits on .feature-block itself (one IntersectionObserver */
+/* per block), so both sides start the instant the user scrolls to    */
+/* THAT block — not independently, which could otherwise let one side */
+/* trigger before the other. The block's own default fade-up from the */
+/* site-wide .reveal/.reveal-visible is neutralised below; its classes */
+/* are used purely as the trigger signal for the two children.        */
+/* ---------------------------------------------------------------- */
+
+.feature-block.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.feature-content,
+.feature-visual {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity var(--motion-slow), transform var(--motion-slow);
+}
+
+.feature-visual {
+  transform: translateX(48px);
+}
+
+.feature-block.feature-reverse .feature-content {
+  transform: translateX(48px);
+}
+
+.feature-block.feature-reverse .feature-visual {
+  transform: translateX(-48px);
+}
+
+.feature-block.reveal-visible .feature-content,
+.feature-block.reveal-visible .feature-visual {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-content,
+  .feature-visual {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 
 
 
@@ -124,7 +356,7 @@
    ========================================================= */
 
 .feature-content {
-  max-width: 500px;
+  max-width: auto;
 }
 
 .feature-number {
@@ -153,7 +385,7 @@
 }
 
 .feature-content h3 {
-  max-width: 500px;
+  max-width: auto;
   margin: 0;
 
   /*
@@ -167,7 +399,7 @@
 }
 
 .feature-description {
-  max-width: 500px;
+  max-width: auto;
 
   margin-top: var(--space-3);
 
@@ -235,6 +467,7 @@
 .feature-visual {
   width: 100%;
   min-width: 0;
+  height: auto
 }
 
 
@@ -392,12 +625,15 @@
 
 @media (max-width: 1023px) {
 
-  .features-section {
-    padding: var(--space-10) 0;
+
+  .feature-pill {
+    padding: 10px 16px;
+    font-size: 13px;
   }
 
-  .features-list {
-    margin-top: var(--space-10);
+  .pill-icon svg {
+    width: 14px;
+    height: 14px;
   }
 
   .feature-block,
@@ -453,8 +689,24 @@
 
 @media (max-width: 767px) {
 
-  .features-section {
-    padding: var(--space-8) 0;
+  .features-hero {
+    padding: calc(var(--space-10) + var(--space-2)) 0 var(--space-10);
+  }
+
+  /* Keep the marquee light on mobile: 2 rows instead of 4 */
+  .features-hero-marquee .marquee-row:nth-child(even) {
+    display: none;
+  }
+
+  .feature-pill {
+    padding: 8px 14px;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .pill-icon svg {
+    width: 13px;
+    height: 13px;
   }
 
 
@@ -462,12 +714,8 @@
      Header
      ----------------------------------------- */
 
-  .features-header {
-    text-align: left;
-  }
-
   .features-header h2 {
-    font-size: clamp(2rem, 9vw, 2.6rem);
+    font-size: var(--font-size-h1-mobile);
 
     line-height: 1.12;
   }
@@ -479,13 +727,16 @@
     line-height: 1.7;
   }
 
+  .features-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-  /* -----------------------------------------
-     Feature list
-     ----------------------------------------- */
-
-  .features-list {
-    margin-top: var(--space-8);
+  .features-actions app-button {
+    width: 100%;
   }
 
 

@@ -7,6 +7,7 @@ import { MultiShopSection } from './sections/multi-shop/multi-shop';
 import { WhoIsItForSection } from './sections/who-is-it-for/who-is-it-for';
 import { ClientEnvironmentSection } from './sections/client-environment/client-environment';
 import { VideoShowcaseSection } from './sections/video-showcase/video-showcase';
+import { FaqSection } from './sections/faq/faq';
 import { FinalCtaSection } from './sections/final-cta/final-cta';
 
 @Component({
@@ -21,6 +22,7 @@ import { FinalCtaSection } from './sections/final-cta/final-cta';
     WhoIsItForSection,
     ClientEnvironmentSection,
     VideoShowcaseSection,
+    FaqSection,
     FinalCtaSection,
   ],
   templateUrl: './home.html',

@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RevealDirective } from '../../shared/directives/reveal';
+import { FinalCtaSection } from '../home/sections/final-cta/final-cta';
+import { ButtonComponent } from '../../shared/ui/button/button';
 
 interface FeatureItem {
   id: string;
@@ -11,10 +14,67 @@ interface FeatureItem {
   images: string[];
 }
 
+export type MarqueeIcon =
+  | 'quotation'
+  | 'order'
+  | 'purchase'
+  | 'stock'
+  | 'alert'
+  | 'delivery'
+  | 'payment'
+  | 'customer'
+  | 'product'
+  | 'qr'
+  | 'pdf'
+  | 'sales'
+  | 'dashboard'
+  | 'discount';
+
+export interface MarqueeItem {
+  label: string;
+  icon: MarqueeIcon;
+}
+
+/* Real TrackSetu features/workflows shown in the hero's background marquee. */
+const MARQUEE_ROWS: MarqueeItem[][] = [
+  [
+    { label: 'Quotation', icon: 'quotation' },
+    { label: 'Order Management', icon: 'order' },
+    { label: 'Inventory Management', icon: 'stock' },
+    { label: 'Payment Tracking', icon: 'payment' },
+    { label: 'QR Code Scanning', icon: 'qr' },
+    { label: 'Delivery Management', icon: 'delivery' },
+  ],
+  [
+    { label: 'Purchase Management', icon: 'purchase' },
+    { label: 'Stock Alerts', icon: 'alert' },
+    { label: 'Customer Management', icon: 'customer' },
+    { label: 'Product Management', icon: 'product' },
+    { label: 'PDF Quotations', icon: 'pdf' },
+    { label: 'Sales Tracking', icon: 'sales' },
+  ],
+  [
+    { label: 'Payment Management', icon: 'payment' },
+    { label: 'Low Stock Alerts', icon: 'alert' },
+    { label: 'Delivery Tracking', icon: 'delivery' },
+    { label: 'Business Dashboard', icon: 'dashboard' },
+    { label: 'Discount Management', icon: 'discount' },
+    { label: 'Purchase Tracking', icon: 'purchase' },
+  ],
+  [
+    { label: 'Order Management', icon: 'order' },
+    { label: 'Quotation', icon: 'quotation' },
+    { label: 'Stock Management', icon: 'stock' },
+    { label: 'Payment Tracking', icon: 'payment' },
+    { label: 'Delivery Management', icon: 'delivery' },
+    { label: 'Inventory Management', icon: 'stock' },
+  ],
+];
+
 @Component({
   selector: 'app-feature',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RevealDirective, FinalCtaSection, ButtonComponent],
   templateUrl: './features.html',
   styleUrl: './features.css',
 })
@@ -172,6 +232,18 @@ export class FeaturesPage  {
       ],
     },
   ];
+
+  /* Each row's data is repeated 4x (an even count, required for the
+     translateX(-50%) loop to land back on an identical repeated pattern)
+     so the track is always wider than the viewport — otherwise, on wide
+     screens, a 2x-repeated short row can run out of pills before the loop
+     resets, showing a gap. */
+  protected readonly marqueeRows: MarqueeItem[][] = MARQUEE_ROWS.map((row) => [
+    ...row,
+    ...row,
+    ...row,
+    ...row,
+  ]);
 
   protected trackByNumber(
     _index: number,

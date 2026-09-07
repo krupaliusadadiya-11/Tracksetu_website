@@ -1,6 +1,7 @@
 <section class="multi-shop">
   <div class="container multi-shop-inner">
     <div class="multi-shop-content" appReveal>
+      <span class="eyebrow">Multi-Shop &amp; Multi-Godown</span>
       <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Manage Every Location From One Connected System</span></h2>
       <p class="supporting">
         TrackSetu keeps location-wise stock and operations connected while giving your business a
@@ -17,8 +18,95 @@
       </ul>
     </div>
 
-    <div class="multi-shop-visual" appReveal [revealDelay]="120">
-      <app-product-mockup variant="locations"></app-product-mockup>
+  <div class="multi-shop-visual" appReveal [revealDelay]="120">
+  <div class="location-network">
+
+    <!-- Soft orbit -->
+    <div class="network-orbit orbit-1"></div>
+    <div class="network-orbit orbit-2"></div>
+
+    <!-- Lightweight curved connections -->
+    <svg class="network-lines" viewBox="0 0 600 440" aria-hidden="true">
+      <path d="M300 220 C270 175 225 130 180 95" />
+      <path d="M300 220 C330 175 375 130 420 95" />
+      <path d="M300 220 C270 265 225 310 180 345" />
+      <path d="M300 220 C330 265 375 310 420 345" />
+
+      <circle cx="180" cy="95" r="5" />
+      <circle cx="420" cy="95" r="5" />
+      <circle cx="180" cy="345" r="5" />
+      <circle cx="420" cy="345" r="5" />
+    </svg>
+
+    <!-- Center -->
+    <div class="network-hub">
+      <div class="hub-glow"></div>
+
+      <div class="hub-logo">
+        <img src="images/TrackSetuLogo.jpg" alt="TrackSetu">
+      </div>
+
+      <strong>TrackSetu</strong>
+      <small>CONNECTED SYSTEM</small>
     </div>
+
+    <!-- Shop A -->
+    <div class="location-node node-shop-a">
+      <div class="node-image">
+        <img src="images/industry/shop_A.png" alt="Shop A">
+      </div>
+
+      <div class="node-info">
+        <strong>Shop A</strong>
+        <small>Stock: 214</small>
+      </div>
+
+      <span class="node-status"></span>
+    </div>
+
+    <!-- Shop B -->
+    <div class="location-node node-shop-b">
+      <div class="node-image">
+        <img src="images/industry/shop_b.png" alt="Shop B">
+      </div>
+
+      <div class="node-info">
+        <strong>Shop B</strong>
+        <small>Stock: 168</small>
+      </div>
+
+      <span class="node-status"></span>
+    </div>
+
+    <!-- Godown 1 -->
+    <div class="location-node node-godown-1">
+      <div class="node-image">
+        <img src="images/industry/godown_A.png" alt="Godown 1">
+      </div>
+
+      <div class="node-info">
+        <strong>Godown 1</strong>
+        <small>Stock: 960</small>
+      </div>
+
+      <span class="node-status"></span>
+    </div>
+
+    <!-- Godown 2 -->
+    <div class="location-node node-godown-2">
+      <div class="node-image">
+        <img src="images/industry/godown_B.png" alt="Godown 2">
+      </div>
+
+      <div class="node-info">
+        <strong>Godown 2</strong>
+        <small>Stock: 512</small>
+      </div>
+
+      <span class="node-status"></span>
+    </div>
+
+  </div>
+</div>
   </div>
 </section>
