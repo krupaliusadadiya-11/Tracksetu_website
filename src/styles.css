@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Color palette — TrackSetu brand */
+  /* Color palette - TrackSetu brand */
   --color-primary: #063B63;
   --color-primary-dark: #092F54;
   --color-secondary: #008F8C;
@@ -64,7 +64,7 @@
   --motion-base: 300ms ease;
   --motion-slow: 400ms ease;
 
-  /* Shadows — subtle, navy-tinted per brand spec */
+  /* Shadows - subtle, navy-tinted per brand spec */
   --shadow-sm: 0 1px 2px rgba(6, 59, 99, 0.05);
   --shadow-card: 0 8px 30px rgba(6, 59, 99, 0.08);
   --shadow-raised: 0 12px 32px rgba(6, 59, 99, 0.12);

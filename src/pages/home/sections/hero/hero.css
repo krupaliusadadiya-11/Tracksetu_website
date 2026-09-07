@@ -174,7 +174,7 @@
   display: block;
 }
 
-/* Floating phone mockup overlapping the dashboard — a real TrackSetu mobile UI screenshot
+/* Floating phone mockup overlapping the dashboard - a real TrackSetu mobile UI screenshot
    that already includes its own rounded screen corners and status bar, so it just needs a
    frame (rounded corners + shadow) rather than a separate CSS bezel/notch. */
 .phone-mockup {
@@ -301,7 +301,7 @@
 }
 
 /* ==========================================================================
-   Sequential entrance animation, 6 strict steps with no overlap — each stage
+   Sequential entrance animation, 6 strict steps with no overlap - each stage
    starts the instant the previous one finishes:
      1. heading (masked slide-up, line by line)      0ms    - 460ms
      2. supporting text + CTA buttons                460ms  - 850ms
@@ -310,14 +310,14 @@
      5. rings spin                                    1600ms - 1900ms
      6. icons, one by one                             1900ms - 2490ms
    Total runtime ~2.5s. Same sequence, same keyframes, same visual style as
-   before — only durations/delays were shortened and tightened.
+   before - only durations/delays were shortened and tightened.
 
    Runs once on load (not scroll-triggered), so it's plain CSS with cumulative
    animation-delay values rather than the site-wide scroll [appReveal]
    directive used elsewhere.
 
    Ring note: rings are faded in via opacity on .ring-svg only (not the outer
-   .hero-ring container, which also holds the icons) — an ancestor's opacity
+   .hero-ring container, which also holds the icons) - an ancestor's opacity
    would otherwise mask the icons' own independent step-6 reveal. This also
    replaces an earlier stroke-dashoffset "draw-in" attempt that didn't work:
    dashoffset only slides a *repeating* dash pattern along the path, it can't

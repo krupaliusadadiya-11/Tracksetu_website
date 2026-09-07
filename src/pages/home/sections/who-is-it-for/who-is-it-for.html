@@ -8,9 +8,10 @@
     ></app-section-heading>
 
     <div class="industry-grid">
-      <article
+      <a
         class="industry-card"
         *ngFor="let industry of industries; let i = index"
+        [routerLink]="['/industries', industry.icon]"
         appReveal
         [revealDelay]="i * 80"
       >
@@ -28,7 +29,7 @@
           <h4>{{ industry.name }}</h4>
           <p>{{ industry.description }}</p>
         </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>

@@ -235,7 +235,7 @@ export class FeaturesPage  {
 
   /* Each row's data is repeated 4x (an even count, required for the
      translateX(-50%) loop to land back on an identical repeated pattern)
-     so the track is always wider than the viewport — otherwise, on wide
+     so the track is always wider than the viewport - otherwise, on wide
      screens, a 2x-repeated short row can run out of pills before the loop
      resets, showing a gap. */
   protected readonly marqueeRows: MarqueeItem[][] = MARQUEE_ROWS.map((row) => [

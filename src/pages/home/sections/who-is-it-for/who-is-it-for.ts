@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { SectionHeadingComponent } from '../../../../shared/ui/section-heading/section-heading';
 import { RevealDirective } from '../../../../shared/directives/reveal';
 
@@ -15,7 +16,7 @@ interface Industry {
 @Component({
   selector: 'app-who-is-it-for-section',
   standalone: true,
-  imports: [CommonModule, SectionHeadingComponent, RevealDirective],
+  imports: [CommonModule, RouterLink, SectionHeadingComponent, RevealDirective],
   templateUrl: './who-is-it-for.html',
   styleUrl: './who-is-it-for.css',
 })

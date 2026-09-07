@@ -40,7 +40,7 @@
 
 /* ---------------------------------------------------------------- */
 /* Merged cards: each industry's photo and content card are fused    */
-/* into one rounded-square unit — image on top, content card below,  */
+/* into one rounded-square unit - image on top, content card below,  */
 /* sharing one border/shadow instead of living in separate layers.   */
 /* ---------------------------------------------------------------- */
 
@@ -123,7 +123,7 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Photo frame — a normal rectangular image, no cut corners. It sits */
+/* Photo frame - a normal rectangular image, no cut corners. It sits */
 /* flush at the top of the merged card; the card's own border-radius */
 /* plus overflow:hidden already round its top edges to match.        */
 /* ---------------------------------------------------------------- */

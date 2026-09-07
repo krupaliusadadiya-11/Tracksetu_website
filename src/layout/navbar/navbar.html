@@ -12,7 +12,35 @@
     <nav class="nav-links" [class.open]="menuOpen()" aria-label="Primary navigation">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
       <a routerLink="/features" routerLinkActive="active" (click)="closeMenu()">Features</a>
-      <a routerLink="/book-a-demo" routerLinkActive="active" (click)="closeMenu()">Book a Demo</a>
+
+      <div class="nav-dropdown" [class.open]="industriesOpen()">
+        <button
+          type="button"
+          class="nav-dropdown-trigger"
+          (click)="toggleIndustries()"
+          [attr.aria-expanded]="industriesOpen()"
+          aria-haspopup="true"
+        >
+          <span>Industries</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-dropdown-chevron">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <div class="nav-dropdown-menu">
+          <a
+            *ngFor="let industry of industries"
+            [routerLink]="['/industries', industry.slug]"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+          >
+            <img [src]="industry.image" [alt]="''" class="nav-dropdown-thumb" />
+            <span>{{ industry.label }}</span>
+          </a>
+        </div>
+      </div>
+
+      <a routerLink="/how-it-works" routerLinkActive="active" (click)="closeMenu()">How It Works</a>
 
       <app-button
         class="mobile-cta"

@@ -1,0 +1,27 @@
+<div class="step-gallery">
+  <nav class="step-gallery-nav" aria-label="Steps">
+    <button
+      type="button"
+      *ngFor="let step of steps; let i = index"
+      class="step-gallery-item"
+      [class.active]="i === activeIndex()"
+      (click)="setActive(i)"
+    >
+      <span class="step-number" *ngIf="step.number">{{ step.number }}</span>
+      <span class="step-title">{{ step.title }}</span>
+    </button>
+  </nav>
+
+  <div class="step-gallery-frame">
+    <img
+      *ngIf="active"
+      [src]="active.image"
+      [alt]="active.alt || active.title"
+      class="step-gallery-image"
+    />
+
+    <p class="step-gallery-caption" *ngIf="active?.description">
+      {{ active?.description }}
+    </p>
+  </div>
+</div>

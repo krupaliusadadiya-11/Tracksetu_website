@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RevealDirective } from '../../shared/directives/reveal';
 import { ButtonComponent } from '../../shared/ui/button/button';
-import { SectionHeadingComponent } from '../../shared/ui/section-heading/section-heading';
 
 interface BusinessTypeOption {
   value: string;
@@ -13,7 +13,7 @@ interface BusinessTypeOption {
 @Component({
   selector: 'app-book-demo-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RevealDirective, ButtonComponent, SectionHeadingComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, RevealDirective, ButtonComponent],
   templateUrl: './book-demo.html',
   styleUrl: './book-demo.css',
 })
@@ -61,7 +61,7 @@ export class BookDemoPage {
     this.submitting.set(true);
 
     /*
-     * No backend/admin integration exists in this project yet — this only
+     * No backend/admin integration exists in this project yet - this only
      * simulates a submission so the form's validation and success states
      * can be reviewed. Wire this to the real "demo request" API once
      * MicroPillar's admin panel endpoint is available.

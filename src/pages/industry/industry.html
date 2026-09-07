@@ -1,0 +1,211 @@
+<ng-container *ngIf="data() as content">
+
+  <!-- Hero -->
+  <section class="industry-hero">
+    <div class="container industry-hero-inner">
+      <div class="industry-hero-content" appReveal>
+        <span class="eyebrow">{{ content.hero.eyebrow }}</span>
+        <h1 class="reveal-heading-mask"><span class="reveal-heading-line">{{ content.hero.heading }}</span></h1>
+        <p class="supporting">{{ content.hero.description }}</p>
+
+        <div class="industry-hero-actions">
+          <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
+          <app-button variant="secondary" size="lg" routerLink="/features">Explore TrackSetu Features</app-button>
+        </div>
+      </div>
+
+      <div class="industry-hero-visual" appReveal [revealDelay]="120">
+        <div class="industry-hero-frame">
+          <img [src]="content.hero.industryImage" [alt]="content.hero.industryImageAlt" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Problems -->
+  <section class="industry-problems">
+    <div class="container">
+      <app-section-heading appReveal eyebrow="The Challenge" [heading]="content.problemsHeading"></app-section-heading>
+
+      <div class="problem-grid">
+        <article
+          class="problem-card"
+          *ngFor="let problem of content.problems; let i = index"
+          appReveal
+          [revealDelay]="(i % 4) * 70"
+        >
+          <span class="problem-number">{{ i + 1 }}</span>
+          <h3>{{ problem.title }}</h3>
+          <p>{{ problem.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How TrackSetu Helps -->
+  <section class="industry-solutions">
+    <div class="container">
+      <app-section-heading appReveal eyebrow="How TrackSetu Helps" [heading]="content.solutionsHeading"></app-section-heading>
+
+      <div class="solution-grid">
+        <article
+          class="solution-card"
+          *ngFor="let solution of content.solutions; let i = index"
+          appReveal
+          [revealDelay]="(i % 3) * 70"
+        >
+          <h4>{{ solution.title }}</h4>
+          <p>{{ solution.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Workflow (business-process flow) -->
+  <section class="industry-workflow">
+    <div class="container">
+      <div class="industry-workflow-inner" appReveal>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">{{ content.workflowHeading }}</span></h2>
+      </div>
+
+      <div class="flow-chips" appReveal [revealDelay]="120">
+        <ng-container *ngFor="let step of content.workflowFlow; let last = last">
+          <span class="flow-chip">{{ step }}</span>
+          <svg *ngIf="!last" class="flow-chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature / Product Spotlight (real screens for this industry's key flow) -->
+  <section class="industry-spotlight">
+    <div class="container">
+      <app-section-heading
+        appReveal
+        eyebrow="Product Spotlight"
+        [heading]="content.spotlightHeading"
+        [supporting]="content.spotlightDescription"
+      ></app-section-heading>
+
+      <div class="industry-gallery-wrap" appReveal [revealDelay]="120">
+        <app-step-gallery [steps]="content.spotlightGallery"></app-step-gallery>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry-specific highlights (stock / payments / product+barcode / purchasing, per industry) -->
+  <section class="industry-highlight" *ngFor="let highlight of content.highlights; let i = index" [class.alt]="i % 2 === 1">
+    <div class="container">
+      <app-section-heading
+        appReveal
+        [heading]="highlight.heading"
+        [supporting]="highlight.description"
+      ></app-section-heading>
+
+      <div class="industry-highlight-images" appReveal [revealDelay]="120">
+        <figure class="industry-highlight-image" *ngFor="let image of highlight.images">
+          <img [src]="image.src" [alt]="image.alt" />
+          <figcaption>{{ image.caption }}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Screenshots -->
+  <section class="industry-screenshots">
+    <div class="container">
+      <app-section-heading
+        appReveal
+        eyebrow="Real Product Screens"
+        [heading]="content.screenshotsHeading"
+        supporting="Actual TrackSetu application screens - not generic software imagery."
+      ></app-section-heading>
+
+      <div class="industry-gallery-wrap" appReveal [revealDelay]="120">
+        <app-step-gallery [steps]="content.screenshots"></app-step-gallery>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Shop / Multi-Godown (shared, generic across industries) -->
+  <app-multi-shop-section></app-multi-shop-section>
+
+  <!-- Why TrackSetu / Final Benefit -->
+  <section class="industry-why">
+    <div class="container industry-why-inner">
+      <app-section-heading
+        appReveal
+        align="left"
+        eyebrow="Why TrackSetu"
+        [heading]="content.whyHeading"
+        [supporting]="content.whyDescription"
+      ></app-section-heading>
+
+      <div class="why-grid">
+        <article
+          class="why-card"
+          *ngFor="let item of content.whyItems; let i = index"
+          appReveal
+          [revealDelay]="(i % 4) * 70"
+        >
+          <div class="why-card-body">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
+          </div>
+
+          <span class="why-card-icon" [ngSwitch]="item.icon">
+            <svg *ngSwitchCase="'link'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 17H7a5 5 0 0 1 0-10h2"></path>
+              <path d="M15 7h2a5 5 0 0 1 0 10h-2"></path>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <svg *ngSwitchCase="'quotation'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="12" height="18" rx="2"></rect>
+              <path d="M8 8h4M8 12h4M8 16h2"></path>
+              <rect x="15" y="14" width="6" height="6" rx="1"></rect>
+            </svg>
+            <svg *ngSwitchCase="'purchase'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7h18"></path>
+              <path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"></path>
+              <path d="M5 7l1 12.2A2 2 0 0 0 8 21h8a2 2 0 0 0 2-1.8L19 7"></path>
+              <path d="M9 11h6"></path>
+            </svg>
+            <svg *ngSwitchCase="'stock'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8l9-5 9 5-9 5-9-5z"></path>
+              <path d="M3 8v8l9 5 9-5V8"></path>
+              <path d="M12 13v8"></path>
+            </svg>
+            <svg *ngSwitchCase="'search'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <svg *ngSwitchCase="'payment'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+              <path d="M2 10h20"></path>
+              <path d="M6 15h4"></path>
+            </svg>
+            <svg *ngSwitchCase="'barcode'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="4" x2="4" y2="20"></line>
+              <line x1="8" y1="4" x2="8" y2="20"></line>
+              <line x1="12" y1="4" x2="12" y2="20"></line>
+              <line x1="16" y1="4" x2="16" y2="20"></line>
+              <line x1="20" y1="4" x2="20" y2="20"></line>
+            </svg>
+          </span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="industry-final-cta">
+    <div class="container industry-final-cta-inner" appReveal>
+      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">{{ content.finalCta.heading }}</span></h2>
+      <p class="supporting">{{ content.finalCta.description }}</p>
+      <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
+    </div>
+  </section>
+
+</ng-container>

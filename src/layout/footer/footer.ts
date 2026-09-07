@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../../shared/directives/reveal';
+import { INDUSTRY_CONTENT, INDUSTRY_SLUGS } from '../../pages/industry/industry-data';
 
 @Component({
   selector: 'app-footer',
@@ -12,4 +13,9 @@ import { RevealDirective } from '../../shared/directives/reveal';
 })
 export class FooterComponent {
   protected readonly year = new Date().getFullYear();
+
+  protected readonly industries = INDUSTRY_SLUGS.map((slug) => ({
+    slug,
+    label: INDUSTRY_CONTENT[slug].navLabel,
+  }));
 }

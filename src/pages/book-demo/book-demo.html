@@ -33,137 +33,181 @@
   </div>
 </section>
 
-<!-- Demo form -->
+<!-- Demo form: detail panel on one side, form on the other -->
 <section class="demo-form-section" id="demo-form">
   <div class="container">
-    <app-section-heading
-      appReveal
-      heading="Tell Us About Your Business"
-      supporting="Share a few details so the TrackSetu team can understand your business structure and prepare a relevant demo."
-    ></app-section-heading>
+    <div class="demo-form-panel">
 
-    <div class="demo-form-card" appReveal [revealDelay]="120">
+      <!-- Detail side -->
+      <aside class="demo-form-aside" appReveal>
+        <a routerLink="/" class="demo-form-brand" aria-label="TrackSetu home">
+          <img src="/images/TrackSetuLogo.jpg" alt="TrackSetu" class="demo-form-brand-logo" />
+          <span class="demo-form-brand-name">TrackSetu</span>
+        </a>
 
-      <!-- Success state, shown after submit instead of the form -->
-      <div class="demo-success" *ngIf="submitted()">
-        <span class="demo-success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6 9 17l-5-5"></path>
-          </svg>
-        </span>
-        <h3>Thank you.</h3>
-        <p>
-          Your demo request has been received. Our team will review your details
-          and contact you using the information provided.
+        <h2>A Demo Built Around Your Business</h2>
+        <p class="demo-form-aside-copy">
+          TrackSetu is set up for individual client environments, with each client
+          having their own database and business data. During the demo, our team
+          can discuss the setup, users, locations and operational workflow
+          relevant to your business.
         </p>
+
+        <ul class="demo-form-checklist">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span>See how quotations, orders and purchasing come together</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span>Walk through stock, delivery, payments and reports</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span>Discuss the setup, users and locations for your business</span>
+          </li>
+        </ul>
+
+        <img
+          src="/images/00-sign-in.png"
+          alt="TrackSetu dashboard preview"
+          class="demo-form-aside-image"
+        />
+      </aside>
+
+      <!-- Form side -->
+      <div class="demo-form-main" appReveal [revealDelay]="120">
+
+        <!-- Success state, shown after submit instead of the form -->
+        <div class="demo-success" *ngIf="submitted()">
+          <span class="demo-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+          </span>
+          <h3>Thank you</h3>
+          <p>
+            Your demo request has been received. Our team will review your details
+            and contact you using the information provided.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <ng-container *ngIf="!submitted()">
+          <h2>Tell Us About Your Business</h2>
+          <p class="demo-form-main-intro">
+            Share a few details so the TrackSetu team can understand your business
+            structure and prepare a relevant demo.
+          </p>
+
+          <form class="demo-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input
+                  id="fullName"
+                  type="text"
+                  formControlName="fullName"
+                  placeholder="Your full name"
+                  [class.invalid]="isInvalid('fullName')"
+                />
+                <span class="field-error" *ngIf="isInvalid('fullName')">Please enter your full name.</span>
+              </div>
+
+              <div class="form-field">
+                <label for="businessName">Business Name <span class="required">*</span></label>
+                <input
+                  id="businessName"
+                  type="text"
+                  formControlName="businessName"
+                  placeholder="Your business name"
+                  [class.invalid]="isInvalid('businessName')"
+                />
+                <span class="field-error" *ngIf="isInvalid('businessName')">Please enter your business name.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input
+                  id="phone"
+                  type="tel"
+                  formControlName="phone"
+                  placeholder="e.g. 98765 43210"
+                  [class.invalid]="isInvalid('phone')"
+                />
+                <span class="field-error" *ngIf="isInvalid('phone')">Please enter a valid phone number.</span>
+              </div>
+
+              <div class="form-field">
+                <label for="shopCount">Number of Shops / Branches <span class="required">*</span></label>
+                <input
+                  id="shopCount"
+                  type="number"
+                  min="1"
+                  formControlName="shopCount"
+                  placeholder="e.g. 3"
+                  [class.invalid]="isInvalid('shopCount')"
+                />
+                <span class="field-error" *ngIf="isInvalid('shopCount')">Please enter the number of locations.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <span class="form-field-label">WhatsApp Available? <span class="required">*</span></span>
+                <div class="toggle-group" role="radiogroup" aria-label="WhatsApp available">
+                  <label class="toggle-option">
+                    <input type="radio" formControlName="whatsapp" value="yes" />
+                    <span>Yes</span>
+                  </label>
+                  <label class="toggle-option">
+                    <input type="radio" formControlName="whatsapp" value="no" />
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="businessType">Business Type <span class="required">*</span></label>
+                <select
+                  id="businessType"
+                  formControlName="businessType"
+                  [class.invalid]="isInvalid('businessType')"
+                >
+                  <option value="" disabled>Select business type</option>
+                  <option *ngFor="let type of businessTypes" [value]="type.value">{{ type.label }}</option>
+                </select>
+                <span class="field-error" *ngIf="isInvalid('businessType')">Please select your business type.</span>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="message">Message <span class="optional">(optional)</span></label>
+              <textarea
+                id="message"
+                formControlName="message"
+                rows="3"
+                placeholder="Anything specific you'd like us to know?"
+              ></textarea>
+            </div>
+
+            <app-button
+              class="demo-submit"
+              type="submit"
+              variant="primary"
+              size="lg"
+              [disabled]="form.invalid || submitting()"
+            >
+              {{ submitting() ? 'Sending...' : 'Request a Demo' }}
+            </app-button>
+
+          </form>
+        </ng-container>
       </div>
 
-      <!-- Form -->
-      <form *ngIf="!submitted()" class="demo-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-
-        <div class="form-row">
-          <div class="form-field">
-            <label for="fullName">Full Name <span class="required">*</span></label>
-            <input
-              id="fullName"
-              type="text"
-              formControlName="fullName"
-              placeholder="Your full name"
-              [class.invalid]="isInvalid('fullName')"
-            />
-            <span class="field-error" *ngIf="isInvalid('fullName')">Please enter your full name.</span>
-          </div>
-
-          <div class="form-field">
-            <label for="businessName">Business Name <span class="required">*</span></label>
-            <input
-              id="businessName"
-              type="text"
-              formControlName="businessName"
-              placeholder="Your business name"
-              [class.invalid]="isInvalid('businessName')"
-            />
-            <span class="field-error" *ngIf="isInvalid('businessName')">Please enter your business name.</span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-field">
-            <label for="phone">Phone Number <span class="required">*</span></label>
-            <input
-              id="phone"
-              type="tel"
-              formControlName="phone"
-              placeholder="e.g. 98765 43210"
-              [class.invalid]="isInvalid('phone')"
-            />
-            <span class="field-error" *ngIf="isInvalid('phone')">Please enter a valid phone number.</span>
-          </div>
-
-          <div class="form-field">
-            <label for="shopCount">Number of Shops / Branches <span class="required">*</span></label>
-            <input
-              id="shopCount"
-              type="number"
-              min="1"
-              formControlName="shopCount"
-              placeholder="e.g. 3"
-              [class.invalid]="isInvalid('shopCount')"
-            />
-            <span class="field-error" *ngIf="isInvalid('shopCount')">Please enter the number of locations.</span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-field">
-            <span class="form-field-label">WhatsApp Available? <span class="required">*</span></span>
-            <div class="toggle-group" role="radiogroup" aria-label="WhatsApp available">
-              <label class="toggle-option">
-                <input type="radio" formControlName="whatsapp" value="yes" />
-                <span>Yes</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" formControlName="whatsapp" value="no" />
-                <span>No</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label for="businessType">Business Type <span class="required">*</span></label>
-            <select
-              id="businessType"
-              formControlName="businessType"
-              [class.invalid]="isInvalid('businessType')"
-            >
-              <option value="" disabled>Select business type</option>
-              <option *ngFor="let type of businessTypes" [value]="type.value">{{ type.label }}</option>
-            </select>
-            <span class="field-error" *ngIf="isInvalid('businessType')">Please select your business type.</span>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label for="message">Message <span class="optional">(optional)</span></label>
-          <textarea
-            id="message"
-            formControlName="message"
-            rows="4"
-            placeholder="Anything specific you'd like us to know?"
-          ></textarea>
-        </div>
-
-        <app-button
-          class="demo-submit"
-          type="submit"
-          variant="primary"
-          size="lg"
-          [disabled]="form.invalid || submitting()"
-        >
-          {{ submitting() ? 'Sending...' : 'Request a Demo' }}
-        </app-button>
-
-      </form>
     </div>
   </div>
 </section>

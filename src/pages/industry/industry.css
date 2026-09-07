@@ -1,0 +1,438 @@
+/* Shared masked heading reveal, triggered by an ancestor's [appReveal] */
+.reveal-heading-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.reveal-heading-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.reveal-visible .reveal-heading-line {
+  animation: sectionHeadingReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sectionHeadingReveal {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-heading-line {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-teal-tint);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.supporting {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+}
+
+/* ===================== Hero ===================== */
+.industry-hero {
+  padding: var(--space-12) 0;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
+}
+
+.industry-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.industry-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.industry-hero-content h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-top: var(--space-2);
+}
+
+.industry-hero-content .supporting {
+  max-width: 520px;
+  margin-top: var(--space-1);
+}
+
+.industry-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.industry-hero-visual {
+  position: relative;
+}
+
+.industry-hero-frame {
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-raised);
+  background: var(--color-surface);
+}
+
+.industry-hero-frame img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===================== Industry Problems ===================== */
+.industry-problems {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.problem-card {
+  padding: var(--space-4);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  transition: box-shadow var(--motion-base), transform var(--motion-base), border-color var(--motion-base);
+}
+
+.problem-card:hover {
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.problem-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-teal-tint);
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  margin-bottom: var(--space-2);
+}
+
+.problem-card h3 {
+  font-size: var(--font-size-h4);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.problem-card p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+/* ===================== How TrackSetu Helps ===================== */
+.industry-solutions {
+  padding: var(--space-10) 0;
+  background: var(--color-background);
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.solution-card {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--motion-base), transform var(--motion-base), border-color var(--motion-base);
+}
+
+.solution-card:hover {
+  box-shadow: var(--shadow-raised);
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.solution-card h4 {
+  font-size: var(--font-size-h4);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.solution-card p {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+/* ===================== Industry Workflow (business-process flow) ===================== */
+.industry-workflow {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.industry-workflow-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.industry-workflow-inner h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-text-primary);
+}
+
+.flow-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  max-width: 900px;
+  margin: var(--space-6) auto 0;
+}
+
+.flow-chip {
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.flow-chip-arrow {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-secondary);
+}
+
+/* ===================== Feature / Product Spotlight & Screenshots galleries ===================== */
+.industry-spotlight {
+  padding: var(--space-10) 0;
+  background: var(--color-background);
+}
+
+.industry-screenshots {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.industry-gallery-wrap {
+  margin-top: var(--space-6);
+}
+
+/* ===================== Industry Highlights (per-industry deep dive) ===================== */
+.industry-highlight {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.industry-highlight.alt {
+  background: var(--color-background);
+}
+
+.industry-highlight-images {
+  margin-top: var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.industry-highlight-image {
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-raised);
+  background: var(--color-surface);
+}
+
+.industry-highlight-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: var(--color-background);
+}
+
+.industry-highlight-image figcaption {
+  padding: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* ===================== Why TrackSetu ===================== */
+.industry-why {
+  padding: var(--space-10) 0;
+  background: var(--color-background);
+}
+
+.industry-why-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.why-card {
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  color: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 190px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--motion-base), transform var(--motion-base);
+}
+
+.why-card:nth-child(odd) {
+  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+}
+
+.why-card:nth-child(even) {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+}
+
+.why-card:hover {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-4px);
+}
+
+.why-card-body h4 {
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  color: var(--color-surface);
+  margin-bottom: var(--space-1);
+}
+
+.why-card-body p {
+  font-size: var(--font-size-small);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.why-card-icon {
+  align-self: flex-end;
+  margin-top: var(--space-3);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.why-card-icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+/* ===================== Final CTA ===================== */
+.industry-final-cta {
+  padding: var(--space-10) 0;
+  background: var(--color-surface);
+}
+
+.industry-final-cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.industry-final-cta-inner h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-text-primary);
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 900px) {
+  .industry-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .industry-hero-content {
+    text-align: center;
+    align-items: center;
+  }
+
+  .industry-hero-actions {
+    justify-content: center;
+  }
+
+  .industry-why-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .industry-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .industry-hero-actions app-button {
+    width: 100%;
+  }
+
+  .flow-chip {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+}

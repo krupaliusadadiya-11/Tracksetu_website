@@ -4,7 +4,7 @@
 
 /*
  * Height is content-based (no forced min-height) so the hero doesn't
- * spill past the viewport — same padding treatment as the Home hero, with
+ * spill past the viewport - same padding treatment as the Home hero, with
  * a little extra top padding on top of that.
  */
 .features-hero {
@@ -23,7 +23,7 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Background marquee — decorative feature pills, grouped above and  */
+/* Background marquee - decorative feature pills, grouped above and  */
 /* below the center content so the middle stays clear for the        */
 /* heading. Each row's data is pre-doubled in the component, so a     */
 /* -50% translateX loops with no visible seam.                       */
@@ -166,7 +166,7 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Staged entrance — plays once on load, same keyframes/timing/      */
+/* Staged entrance - plays once on load, same keyframes/timing/      */
 /* easing as the Home hero's own sequence (this block is always in   */
 /* the initial viewport too, so it doesn't use the scroll [appReveal]*/
 /* directive used elsewhere on this page).                           */
@@ -297,13 +297,13 @@
 
 /* ---------------------------------------------------------------- */
 /* Converging reveal: content and image slide in from the side they  */
-/* actually sit on — content from the left, image from the right by  */
+/* actually sit on - content from the left, image from the right by  */
 /* default; flipped on .feature-reverse rows, where the layout swaps */
 /* sides via `order` above.                                          */
 /*                                                                    */
 /* [appReveal] sits on .feature-block itself (one IntersectionObserver */
 /* per block), so both sides start the instant the user scrolls to    */
-/* THAT block — not independently, which could otherwise let one side */
+/* THAT block - not independently, which could otherwise let one side */
 /* trigger before the other. The block's own default fade-up from the */
 /* site-wide .reveal/.reveal-visible is neutralised below; its classes */
 /* are used purely as the trigger signal for the two children.        */
