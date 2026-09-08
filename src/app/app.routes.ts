@@ -47,6 +47,52 @@ export const routes: Routes = [
       },
 
       {
+        path: 'faq',
+        loadComponent: () =>
+          import('../pages/faq/faq').then((m) => m.FaqPage),
+        title: 'FAQs - TrackSetu',
+      },
+
+      {
+        path: 'blogs',
+        loadComponent: () =>
+          import('../pages/blogs/blogs').then((m) => m.BlogsPage),
+        title: 'Blog - TrackSetu',
+      },
+
+      {
+        path: 'blogs/:slug',
+        loadComponent: () =>
+          import('../pages/blogs/blog-detail/blog-detail').then(
+            (m) => m.BlogDetailPage
+          ),
+        title: 'Blog - TrackSetu',
+      },
+
+      {
+        path: 'customer-stories',
+        loadComponent: () =>
+          import('../pages/customer-stories/customer-stories').then(
+            (m) => m.CustomerStoriesPage
+          ),
+        title: 'Customer Stories - TrackSetu',
+      },
+
+      {
+        path: 'pricing',
+        loadComponent: () =>
+          import('../pages/pricing/pricing').then((m) => m.PricingPage),
+        title: 'Pricing - TrackSetu',
+      },
+
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('../pages/contact/contact').then((m) => m.ContactPage),
+        title: 'Contact - TrackSetu',
+      },
+
+      {
         path: '**',
         redirectTo: '',
       },

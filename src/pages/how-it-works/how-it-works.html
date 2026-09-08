@@ -1,14 +1,23 @@
 <!-- Hero -->
 <section class="hiw-hero">
-  <div class="container hiw-hero-inner" appReveal>
-    <span class="eyebrow">Implementation & Onboarding</span>
-    <h1 class="reveal-heading-mask"><span class="reveal-heading-line">From Demo to Go Live</span></h1>
-    <p class="supporting">
+  <video class="hiw-hero-video" [muted]="true" autoplay loop playsinline preload="auto" aria-hidden="true">
+    <source src="/video/handsake-video.mp4" type="video/mp4" />
+  </video>
+  <div class="hiw-hero-loop-mask" aria-hidden="true"></div>
+  <div class="hiw-hero-overlay" aria-hidden="true"></div>
+
+  <div class="container hiw-hero-inner">
+
+    <h1 class="hiw-hero-heading">
+      <span class="reveal-heading-mask"><span class="reveal-heading-line hiw-line-1 text-highlight">From Demo to Go Live</span></span>
+      <span class="reveal-heading-mask"><span class="reveal-heading-line hiw-line-2">We Set Everything Up for You</span></span>
+    </h1>
+    <p class="supporting hiw-fade-up hiw-text-fade">
       We understand how your business works, configure TrackSetu around it, train your team, and help
       you go live with confidence.
     </p>
 
-    <div class="hiw-hero-actions">
+    <div class="hiw-hero-actions hiw-fade-up hiw-actions-fade">
       <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
       <app-button variant="secondary" size="lg" routerLink="/features">See TrackSetu in Action</app-button>
     </div>
@@ -25,21 +34,65 @@
       supporting="TrackSetu is implemented step by step. Our team handles the setup, configuration and training, so you don't have to configure everything yourself."
     ></app-section-heading>
 
-    <div class="stage-row">
+    <div class="stage-track">
       <div class="stage-item" *ngFor="let stage of stages; let i = index" appReveal [revealDelay]="i * 70">
         <span class="stage-number">{{ stage.number }}</span>
-        <span class="stage-title">{{ stage.title }}</span>
+
+        <div class="stage-frame">
+          <div class="stage-text">
+            <span class="stage-title">{{ stage.title }}</span>
+            <span class="stage-desc">{{ stage.description }}</span>
+          </div>
+
+          <span class="stage-circle" [ngSwitch]="stage.icon">
+          <svg *ngSwitchCase="'talk'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          <svg *ngSwitchCase="'setup'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <svg *ngSwitchCase="'training'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10 12 5 2 10l10 5 10-5z"></path>
+            <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path>
+          </svg>
+          <svg *ngSwitchCase="'golive'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+          </svg>
+          <svg *ngSwitchCase="'support'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Detailed process intro -->
+<section class="hiw-detail-intro">
+  <div class="container">
+    <app-section-heading
+      appReveal
+      eyebrow="The Process in Detail"
+      heading="How TrackSetu Gets Your Business Ready"
+      supporting="Every stage is handled step by step, from understanding your business to getting your team trained and the system running."
+    ></app-section-heading>
+  </div>
+</section>
+
 <!-- Step 01: Talk & Demo -->
-<section class="step-section">
+<section class="step-section reverse">
   <div class="container step-inner">
     <div class="step-copy" appReveal>
-      <span class="step-badge">01</span>
-      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">We Start by Understanding Your Business</span></h2>
+      <div class="step-title-row">
+        <span class="step-badge">01</span>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">We Start by Understanding Your Business</span></h2>
+      </div>
       <p class="supporting">
         Before anything is configured, our team takes time to understand how your business actually works.
       </p>
@@ -55,21 +108,19 @@
     </div>
 
     <div class="step-visual" appReveal [revealDelay]="120">
-      <span class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
-      </span>
+      <img src="/images/how-it-work/1_Talk%20%26%20Demo.png" alt="TrackSetu team discussing a business's workflow during a demo" />
     </div>
   </div>
 </section>
 
 <!-- Step 02: Setup -->
-<section class="step-section reverse">
+<section class="step-section">
   <div class="container step-inner">
     <div class="step-copy" appReveal>
-      <span class="step-badge">02</span>
-      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">We Prepare the System Around Your Business</span></h2>
+      <div class="step-title-row">
+        <span class="step-badge">02</span>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">We Prepare the System Around Your Business</span></h2>
+      </div>
       <p class="supporting">
         We prepare the system around your business before your team starts using it.
       </p>
@@ -83,22 +134,19 @@
     </div>
 
     <div class="step-visual" appReveal [revealDelay]="120">
-      <span class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-      </span>
+      <img src="/images/how-it-work/2_Setup.png" alt="TrackSetu team configuring the system and server for a business" />
     </div>
   </div>
 </section>
 
 <!-- Step 03: Training -->
-<section class="step-section">
+<section class="step-section reverse">
   <div class="container step-inner">
     <div class="step-copy" appReveal>
-      <span class="step-badge">03</span>
-      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Hands-On Training for Your Team</span></h2>
+      <div class="step-title-row">
+        <span class="step-badge">03</span>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Hands-On Training for Your Team</span></h2>
+      </div>
       <p class="supporting">
         Setting up the system is only part of the process. Your team is trained to use TrackSetu
         confidently in their daily work.
@@ -113,22 +161,19 @@
     </div>
 
     <div class="step-visual" appReveal [revealDelay]="120">
-      <span class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 10 12 5 2 10l10 5 10-5z"></path>
-          <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path>
-        </svg>
-      </span>
+      <img src="/images/how-it-work/3_Training.png" alt="TrackSetu trainer walking a business team through the dashboard" />
     </div>
   </div>
 </section>
 
 <!-- Step 04: Go Live -->
-<section class="step-section reverse">
+<section class="step-section">
   <div class="container step-inner">
     <div class="step-copy" appReveal>
-      <span class="step-badge">04</span>
-      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Ready for Daily Business</span></h2>
+      <div class="step-title-row">
+        <span class="step-badge">04</span>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Ready for Daily Business</span></h2>
+      </div>
       <p class="supporting">
         Once the system is ready and your team is trained, TrackSetu moves from setup to real business use.
       </p>
@@ -142,24 +187,19 @@
     </div>
 
     <div class="step-visual" appReveal [revealDelay]="120">
-      <span class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-        </svg>
-      </span>
+      <img src="/images/how-it-work/4_Go%20Live.png" alt="TrackSetu dashboard ready for daily business use" />
     </div>
   </div>
 </section>
 
 <!-- Step 05: Support -->
-<section class="step-section">
+<section class="step-section reverse">
   <div class="container step-inner">
     <div class="step-copy" appReveal>
-      <span class="step-badge">05</span>
-      <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Support Continues After Go Live</span></h2>
+      <div class="step-title-row">
+        <span class="step-badge">05</span>
+        <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Support Continues After Go Live</span></h2>
+      </div>
       <p class="supporting">
         Going live is not the end of the relationship. Our team continues to support your business as
         you use TrackSetu.
@@ -174,12 +214,7 @@
     </div>
 
     <div class="step-visual" appReveal [revealDelay]="120">
-      <span class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-          <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-        </svg>
-      </span>
+      <img src="/images/how-it-work/5_support.png" alt="TrackSetu support executive assisting a customer" style="object-position: 62% center" />
     </div>
   </div>
 </section>
@@ -188,9 +223,9 @@
 <section class="hiw-data">
   <div class="container hiw-data-inner">
     <div class="hiw-data-copy" appReveal>
-      <span class="eyebrow eyebrow-dark">Data Ownership</span>
+      <span class="eyebrow">Data Ownership</span>
       <h2 class="reveal-heading-mask"><span class="reveal-heading-line">Your Data Stays Under Your Control</span></h2>
-      <p class="supporting supporting-dark">
+      <p class="supporting">
         TrackSetu is set up around individual client environments, so your business data stays yours.
       </p>
     </div>

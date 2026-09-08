@@ -31,6 +31,11 @@
     opacity: 1;
     animation: none;
   }
+
+  .step-copy.reveal,
+  .step-visual.reveal {
+    transform: none !important;
+  }
 }
 
 .eyebrow {
@@ -53,11 +58,88 @@
 
 /* ===================== Hero ===================== */
 .hiw-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Taller than the old content-driven height so the 16:9 video has room to
+     show its full frame under object-fit:cover instead of losing the top
+     and bottom of the handshake on wide viewports. */
+  min-height: clamp(520px, 54vw, 760px);
   padding: var(--space-12) 0;
+  /* Fallback shown until the video loads, and behind it if it fails. */
   background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
 }
 
 .hiw-hero-inner {
+  width: 100%;
+}
+
+/* Background video layer: sits behind the existing hero content, never
+   affects its layout since both are absolutely positioned before it. */
+.hiw-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* Keeps the video on its own GPU layer for smoother playback. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* The source clip itself is blank for its first ~0.7s and fades to blank
+   again over its last ~0.5s, so every native loop restart briefly shows an
+   empty frame - it reads as the video "blinking" before it starts again.
+   This cover fades to fully opaque (matching the hero's own background
+   gradient) for exactly those two blank windows and is transparent the
+   rest of the time, hiding the empty frames instead of showing them.
+   Timed to the clip's fixed 8s duration - update if the video changes. */
+.hiw-hero-loop-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(6, 59, 99, 0.09) 0%, rgba(6, 59, 99, 0.03) 42%, var(--color-background) 78%);
+  animation: hiwHeroLoopMask 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hiwHeroLoopMask {
+  0% {
+    opacity: 1;
+  }
+  9% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Light wash so the centered heading/copy stay readable over the video,
+   tapering toward the edges so the handshake still reads clearly there. */
+.hiw-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 249, 252, 0.5) 0%,
+    rgba(245, 249, 252, 0.86) 30%,
+    rgba(245, 249, 252, 0.86) 70%,
+    rgba(245, 249, 252, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+.hiw-hero-inner {
+  position: relative;
+  z-index: 3;
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
@@ -72,6 +154,76 @@
   line-height: 1.1;
   color: var(--color-text-primary);
   margin-top: var(--space-2);
+}
+
+.hiw-hero-heading .text-highlight {
+  color: var(--color-secondary);
+}
+
+/* ---------------------------------------------------------------- */
+/* Hero staged entrance - plays once on load, same keyframes/timing/ */
+/* easing as the Home and Features hero sequence (hero is always in  */
+/* the initial viewport, so it doesn't use the scroll [appReveal]    */
+/* directive used elsewhere on this page).                           */
+/*   Step 1 (0ms-480ms):   heading reveals line by line, masked      */
+/*   Step 2 (560ms-890ms): supporting text, then buttons             */
+/* ---------------------------------------------------------------- */
+
+@keyframes hiwHeadingLineIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hiwFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hiw-hero-heading .reveal-heading-line {
+  animation: hiwHeadingLineIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hiw-hero-heading .hiw-line-1 {
+  animation-delay: 0ms;
+}
+
+.hiw-hero-heading .hiw-line-2 {
+  animation-delay: 100ms;
+}
+
+.hiw-fade-up {
+  opacity: 0;
+  animation: hiwFadeUp 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hiw-text-fade {
+  animation-delay: 560ms;
+}
+
+.hiw-actions-fade {
+  animation-duration: 330ms;
+  animation-delay: 720ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hiw-hero-heading .reveal-heading-line,
+  .hiw-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hiw-hero-inner .supporting {
@@ -93,55 +245,121 @@
   background: var(--color-surface);
 }
 
-.stage-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--space-3);
-  margin-top: var(--space-6);
+.stage-track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
 }
 
 .stage-item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-4);
-  text-align: center;
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  transition: box-shadow var(--motion-base), transform var(--motion-base), border-color var(--motion-base);
+  align-items: flex-start;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  cursor: default;
 }
 
-.stage-item:hover {
-  box-shadow: var(--shadow-card);
-  border-color: var(--color-accent);
-  transform: translateY(-4px);
+/* Hovering any one step focuses that complete step (number, connector,
+   curve, icon, title and description together) and softly de-emphasizes
+   the other four. Scoped to real hover-capable pointers so touch devices
+   keep every step normally visible. */
+@media (hover: hover) and (pointer: fine) {
+  .stage-item {
+    transition: opacity 400ms ease, filter 400ms ease;
+  }
+
+  .stage-track:hover .stage-item {
+    opacity: 0.45;
+    filter: blur(1.5px);
+  }
+
+  .stage-track:hover .stage-item:hover {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 .stage-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--color-teal-tint);
-  color: var(--color-secondary);
+  padding-left: var(--space-1);
+  font-size: 13px;
   font-weight: 700;
-  font-size: var(--font-size-small);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+/* The connector: an open bracket (no left edge) whose right side curves into
+   a semicircle around the icon, matching the reference infographic shape
+   instead of a closed rectangular card. */
+.stage-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 132px;
+  padding: var(--space-2) 44px var(--space-2) var(--space-1);
+  border: 2px solid var(--color-secondary);
+  border-left: none;
+  border-radius: 0 999px 999px 0;
+}
+
+.stage-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
 .stage-title {
-  font-size: var(--font-size-body);
-  font-weight: 600;
+  font-size: var(--font-size-small);
+  font-weight: 700;
   color: var(--color-text-primary);
+}
+
+.stage-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+}
+
+.stage-circle {
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.stage-circle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ===================== Detailed process intro ===================== */
+.hiw-detail-intro {
+  padding: var(--space-8)  0;
+  background: var(--color-background);
 }
 
 /* ===================== Step sections ===================== */
 .step-section {
   padding: var(--space-10) 0;
   background: var(--color-background);
+  overflow-x: hidden;
 }
 
 .step-section:nth-of-type(even) {
@@ -167,6 +385,29 @@
   order: 1;
 }
 
+/* Text and visual reveal from the side they sit on, so the two halves of
+   each step enter from opposite directions instead of both fading up. */
+.step-section:not(.reverse) .step-copy.reveal {
+  transform: translateX(-24px);
+}
+
+.step-section:not(.reverse) .step-visual.reveal {
+  transform: translateX(24px);
+}
+
+.step-section.reverse .step-copy.reveal {
+  transform: translateX(24px);
+}
+
+.step-section.reverse .step-visual.reveal {
+  transform: translateX(-24px);
+}
+
+.step-copy.reveal-visible,
+.step-visual.reveal-visible {
+  transform: translateX(0);
+}
+
 .step-copy {
   display: flex;
   flex-direction: column;
@@ -174,8 +415,15 @@
   gap: var(--space-2);
 }
 
+.step-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
 .step-badge {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   min-width: 40px;
@@ -186,16 +434,90 @@
   color: var(--color-secondary);
   font-weight: 700;
   font-size: var(--font-size-small);
+  /* h2's line-height (1.25) adds leading above the glyphs that the badge's
+     fixed height doesn't have, so nudge the badge down by that half-leading
+     to line it up with the first line of the heading, not the top of its
+     line box - keeps the badge pinned to line 1 even when the heading wraps. */
+  margin-top: calc(var(--font-size-h2) * 0.125);
 }
 
 .step-copy h2 {
   font-size: var(--font-size-h2);
   color: var(--color-text-primary);
-  margin-top: var(--space-1);
 }
 
 .step-copy .supporting {
   max-width: 520px;
+}
+
+/* Stagger the rest of the step content in after the heading, instead of it
+   just riding along with the parent .step-copy's own slide-in as one block. */
+@keyframes stepContentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-copy .supporting,
+.step-copy .checklist li,
+.step-copy > app-button {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.step-copy.reveal-visible .supporting {
+  animation: stepContentFadeUp 480ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+.step-copy.reveal-visible .checklist li {
+  animation: stepContentFadeUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(1) {
+  animation-delay: 260ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(2) {
+  animation-delay: 320ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(3) {
+  animation-delay: 380ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(4) {
+  animation-delay: 440ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(6) {
+  animation-delay: 560ms;
+}
+
+.step-copy.reveal-visible .checklist li:nth-child(7) {
+  animation-delay: 620ms;
+}
+
+.step-copy.reveal-visible > app-button {
+  animation: stepContentFadeUp 420ms cubic-bezier(0.22, 1, 0.36, 1) 700ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-copy .supporting,
+  .step-copy .checklist li,
+  .step-copy > app-button {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .checklist {
@@ -226,32 +548,27 @@
 }
 
 .step-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.step-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(160px, 22vw, 220px);
-  height: clamp(160px, 22vw, 220px);
-  border-radius: 50%;
-  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
-  color: var(--color-surface);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow-raised);
+  background: var(--color-teal-tint);
 }
 
-.step-icon svg {
-  width: 42%;
-  height: 42%;
+.step-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 /* ===================== Data Ownership & Control ===================== */
 .hiw-data {
   padding: var(--space-10) 0;
-  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+  background: var(--color-background);
 }
 
 .hiw-data-inner {
@@ -264,23 +581,14 @@
 .hiw-data-copy {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-2);
-}
-
-.eyebrow-dark {
-  align-self: flex-start;
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--color-surface);
 }
 
 .hiw-data-copy h2 {
   font-size: var(--font-size-h2);
-  color: var(--color-surface);
+  color: var(--color-text-primary);
   margin-top: var(--space-1);
-}
-
-.supporting-dark {
-  color: rgba(255, 255, 255, 0.85);
 }
 
 .hiw-data-grid {
@@ -289,11 +597,21 @@
   gap: var(--space-3);
 }
 
+/* Sequential tilt: each card carries the dark gradient the section used to
+   have as its own background, alternating angle so the grid reads as a
+   deliberate sequence rather than four identical tiles. */
 .hiw-data-point {
   padding: var(--space-4);
   border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--color-surface);
+}
+
+.hiw-data-point:nth-child(odd) {
+  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+}
+
+.hiw-data-point:nth-child(even) {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
 }
 
 .hiw-data-point h4 {
@@ -372,16 +690,36 @@
   }
 
   .step-visual {
-    order: -1;
-  }
-
-  .step-icon {
-    width: 140px;
-    height: 140px;
+    max-width: 420px;
+    margin-top: var(--space-2);
   }
 
   .hiw-data-inner {
     grid-template-columns: 1fr;
+  }
+
+  .stage-track {
+    gap: var(--space-3);
+  }
+
+  .stage-frame {
+    min-height: 116px;
+    padding-right: 30px;
+  }
+
+  .stage-circle {
+    width: 40px;
+    height: 40px;
+    right: -12px;
+  }
+
+  .stage-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .stage-desc {
+    font-size: 12px;
   }
 }
 
@@ -411,5 +749,52 @@
   .hiw-data-grid,
   .requirement-list {
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile: the row of open brackets becomes a vertical flow of the same
+     connector shape, open at the top (where the number sits) and curving
+     into the icon at the bottom instead of on the right. */
+  .stage-track {
+    flex-direction: column;
+    gap: var(--space-7);
+  }
+
+  .stage-item {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .stage-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: var(--space-2);
+    bottom: -28px;
+    width: 2px;
+    height: 28px;
+    background: var(--color-border);
+  }
+
+  .stage-frame {
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid var(--color-secondary);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    min-height: 0;
+    padding: var(--space-3) var(--space-3) 40px;
+  }
+
+  .stage-circle {
+    top: auto;
+    right: 50%;
+    bottom: -24px;
+    transform: translateX(50%);
+    width: 48px;
+    height: 48px;
+  }
+
+  .stage-circle svg {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -5,9 +5,13 @@ import { RevealDirective } from '../../shared/directives/reveal';
 import { ButtonComponent } from '../../shared/ui/button/button';
 import { SectionHeadingComponent } from '../../shared/ui/section-heading/section-heading';
 
+type StageIcon = 'talk' | 'setup' | 'training' | 'golive' | 'support';
+
 interface JourneyStage {
   number: string;
   title: string;
+  description: string;
+  icon: StageIcon;
 }
 
 interface ChecklistItem {
@@ -32,11 +36,11 @@ interface RequirementItem {
 })
 export class HowItWorksPage {
   protected readonly stages: JourneyStage[] = [
-    { number: '01', title: 'Talk & Demo' },
-    { number: '02', title: 'Setup' },
-    { number: '03', title: 'Training' },
-    { number: '04', title: 'Go Live' },
-    { number: '05', title: 'Support' },
+    { number: '01', title: 'Talk & Demo', description: 'We learn how your business works.', icon: 'talk' },
+    { number: '02', title: 'Setup', description: 'We configure the system around you.', icon: 'setup' },
+    { number: '03', title: 'Training', description: 'Your team learns the workflow.', icon: 'training' },
+    { number: '04', title: 'Go Live', description: 'You start using TrackSetu daily.', icon: 'golive' },
+    { number: '05', title: 'Support', description: 'We stay with you after go live.', icon: 'support' },
   ];
 
   protected readonly demoChecklist: ChecklistItem[] = [

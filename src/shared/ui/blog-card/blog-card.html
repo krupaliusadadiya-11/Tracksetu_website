@@ -1,0 +1,21 @@
+<a class="blog-card" [routerLink]="['/blogs', article.slug]">
+  <span class="blog-card-image-wrap">
+    <img [src]="article.image" [alt]="article.title" class="blog-card-image" />
+  </span>
+
+  <span class="blog-card-body">
+    <span class="blog-card-category">{{ article.category }}</span>
+    <h3 class="blog-card-title">{{ article.title }}</h3>
+    <p class="blog-card-excerpt">{{ article.excerpt }}</p>
+
+    <span class="blog-card-meta">{{ article.date }} · {{ article.readTime }}</span>
+
+    <span class="blog-card-link">
+      Read Article
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </span>
+  </span>
+</a>

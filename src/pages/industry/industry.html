@@ -3,12 +3,12 @@
   <!-- Hero -->
   <section class="industry-hero">
     <div class="container industry-hero-inner">
-      <div class="industry-hero-content" appReveal>
-        <span class="eyebrow">{{ content.hero.eyebrow }}</span>
-        <h1 class="reveal-heading-mask"><span class="reveal-heading-line">{{ content.hero.heading }}</span></h1>
-        <p class="supporting">{{ content.hero.description }}</p>
+      <div class="industry-hero-content">
+        <span class="eyebrow industry-fade-up industry-eyebrow-fade">{{ content.hero.eyebrow }}</span>
+        <h1 class="industry-hero-heading reveal-heading-mask"><span class="reveal-heading-line industry-line-1">{{ content.hero.heading }}</span></h1>
+        <p class="supporting industry-fade-up industry-text-fade">{{ content.hero.description }}</p>
 
-        <div class="industry-hero-actions">
+        <div class="industry-hero-actions industry-fade-up industry-actions-fade">
           <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
           <app-button variant="secondary" size="lg" routerLink="/features">Explore TrackSetu Features</app-button>
         </div>

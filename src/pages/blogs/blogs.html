@@ -1,0 +1,52 @@
+<!-- Hero -->
+<section class="blog-hero">
+  <div class="container blog-hero-inner">
+    <!-- <span class="eyebrow">Insights & Resources</span> -->
+    <h1 class="blog-hero-heading">
+      <span class="reveal-heading-mask"><span class="reveal-heading-line blog-line-1 text-highlight">Practical Insights</span></span>
+      <span class="reveal-heading-mask"><span class="reveal-heading-line blog-line-2">for Better Business Operations</span></span>
+    </h1>
+    <p class="supporting blog-hero-fade blog-hero-text-fade">
+      Explore practical guides, implementation insights, and ideas to help your business simplify operations and get more from its software.
+    </p>
+    <app-button variant="primary" size="lg" class="blog-hero-fade blog-hero-actions-fade" routerLink="/book-a-demo">
+      Book a Demo
+    </app-button>
+  </div>
+</section>
+
+<!-- Category filter -->
+<section class="blog-filter-section">
+  <div class="container">
+    <div class="blog-filters" appReveal>
+      <button
+        *ngFor="let category of categories"
+        type="button"
+        class="blog-filter"
+        [class.active]="activeCategory() === category"
+        (click)="setCategory(category)"
+      >
+        {{ category }}
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Grid -->
+<section class="blog-grid-section">
+  <div class="container">
+    <div class="blog-grid">
+      <app-blog-card
+        *ngFor="let article of filteredArticles()"
+        [article]="article"
+        appReveal
+      ></app-blog-card>
+    </div>
+
+    <p class="blog-empty" *ngIf="filteredArticles().length === 0">
+      No articles in this category yet.
+    </p>
+  </div>
+</section>
+
+<app-final-cta-section></app-final-cta-section>

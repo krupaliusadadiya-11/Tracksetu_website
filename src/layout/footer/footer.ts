@@ -18,4 +18,11 @@ export class FooterComponent {
     slug,
     label: INDUSTRY_CONTENT[slug].navLabel,
   }));
+
+  protected readonly resources = [
+    { label: 'How It Works', routerLink: '/how-it-works' },
+    { label: 'FAQs', routerLink: '/faq' },
+    { label: 'Blogs', routerLink: '/blogs' },
+    { label: 'Customer Stories', routerLink: '/customer-stories' },
+  ];
 }

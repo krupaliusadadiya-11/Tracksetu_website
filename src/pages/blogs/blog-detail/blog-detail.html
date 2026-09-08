@@ -1,0 +1,86 @@
+<ng-container *ngIf="article() as post">
+  <div class="container blog-back">
+    <button type="button" class="blog-back-button" (click)="goToBlogs()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"></path>
+        <path d="m12 19-7-7 7-7"></path>
+      </svg>
+      Back to Blogs
+    </button>
+  </div>
+
+  <header class="blog-article-header">
+    <div class="container blog-article-header-inner">
+      <div class="blog-article-text" appReveal>
+        <span class="blog-article-category">{{ post.category }}</span>
+        <h1>{{ post.title }}</h1>
+        <p class="blog-article-intro">{{ post.introduction }}</p>
+        <p class="blog-article-meta">{{ post.date }} · {{ post.readTime }}</p>
+      </div>
+
+      <div class="blog-article-visual" appReveal [revealDelay]="120">
+        <img [src]="post.image" [alt]="post.title" class="blog-featured-image" />
+      </div>
+    </div>
+  </header>
+
+  <div class="container blog-content-layout">
+    <aside class="blog-toc">
+      <span class="blog-toc-label">On This Page</span>
+      <nav class="blog-toc-list" aria-label="Article sections">
+        <button
+          type="button"
+          *ngFor="let item of tocItems()"
+          class="blog-toc-link"
+          [class.active]="activeSectionId() === item.id"
+          (click)="scrollToSection(item.id)"
+        >
+          {{ item.label }}
+        </button>
+      </nav>
+    </aside>
+
+    <div class="blog-article-body">
+      <div class="blog-key-takeaway" data-toc-id="key-takeaway" appReveal>
+        <span class="blog-key-takeaway-label">Key Takeaway</span>
+        <p>{{ post.keyTakeaway }}</p>
+      </div>
+
+      <div class="blog-section" *ngFor="let section of post.sections; let i = index" [attr.data-toc-id]="'section-' + i" appReveal>
+        <h2>{{ section.heading }}</h2>
+        <p *ngIf="section.body">{{ section.body }}</p>
+        <ul *ngIf="section.list">
+          <li *ngFor="let item of section.list">{{ item }}</li>
+        </ul>
+      </div>
+
+      <div class="blog-checklist" data-toc-id="checklist" appReveal>
+        <h2>{{ post.checklist.heading }}</h2>
+        <ul>
+          <li *ngFor="let item of post.checklist.items">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="blog-connection" data-toc-id="connection" appReveal>
+        <h2>{{ post.trackSetuConnection.heading }}</h2>
+        <p>{{ post.trackSetuConnection.body }}</p>
+      </div>
+    </div>
+  </div>
+
+  <app-final-cta-section></app-final-cta-section>
+
+  <section class="blog-related" *ngIf="relatedArticles().length">
+    <div class="container">
+      <h2 class="blog-related-heading" appReveal>Related Articles</h2>
+      <div class="blog-related-grid">
+        <app-blog-card *ngFor="let related of relatedArticles()" [article]="related" appReveal></app-blog-card>
+      </div>
+    </div>
+  </section>
+</ng-container>

@@ -40,7 +40,61 @@
         </div>
       </div>
 
-      <a routerLink="/how-it-works" routerLinkActive="active" (click)="closeMenu()">How It Works</a>
+      <div class="nav-dropdown" [class.open]="resourcesOpen()">
+        <button
+          type="button"
+          class="nav-dropdown-trigger"
+          (click)="toggleResources()"
+          [attr.aria-expanded]="resourcesOpen()"
+          aria-haspopup="true"
+        >
+          <span>Resources</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-dropdown-chevron">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <div class="nav-dropdown-menu nav-dropdown-menu-compact">
+          <a
+            *ngFor="let resource of resources"
+            [routerLink]="resource.routerLink"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+          >
+            <span class="nav-dropdown-icon" [ngSwitch]="resource.icon">
+              <svg *ngSwitchCase="'workflow'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="12" r="3"></circle>
+                <path d="M9 6h3a4 4 0 0 1 4 4"></path>
+                <path d="M9 18h3a4 4 0 0 0 4-4"></path>
+              </svg>
+              <svg *ngSwitchCase="'help'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-1.5 2-2.5 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+              <svg *ngSwitchCase="'file'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <line x1="10" y1="9" x2="8" y2="9"></line>
+              </svg>
+              <svg *ngSwitchCase="'users'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span>{{ resource.label }}</span>
+          </a>
+        </div>
+      </div>
+
+      <a routerLink="/pricing" routerLinkActive="active" (click)="closeMenu()">Pricing</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
 
       <app-button
         class="mobile-cta"

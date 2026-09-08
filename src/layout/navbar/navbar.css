@@ -54,7 +54,7 @@
 }
 
 .nav-links a {
-  font-size: var(--font-size-small);
+  font-size: 15px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   padding: 8px 0;
@@ -83,7 +83,7 @@
   background: transparent;
   border: none;
   font-family: var(--font-family);
-  font-size: var(--font-size-small);
+  font-size: 15px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   padding: 8px 0;
@@ -135,6 +135,26 @@
   height: 32px;
   border-radius: 6px;
   object-fit: cover;
+}
+
+/* Resources dropdown: icon-based rows, same trigger/menu chrome as Industries */
+.nav-dropdown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-secondary);
+}
+
+.nav-dropdown-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-dropdown-menu-compact {
+  min-width: 208px;
 }
 
 .nav-dropdown-menu a:hover,

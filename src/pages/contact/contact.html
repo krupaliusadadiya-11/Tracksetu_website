@@ -1,0 +1,124 @@
+<!-- Hero -->
+<section class="contact-hero">
+  <div class="container contact-hero-inner">
+    <h1 class="contact-hero-heading">
+      <span class="reveal-heading-mask"><span class="reveal-heading-line contact-line-1 text-highlight">Connect With the Team </span></span>
+      <span class="reveal-heading-mask"><span class="reveal-heading-line contact-line-2">Behind TrackSetu</span></span>
+    </h1>
+
+    <p class="supporting contact-hero-fade contact-hero-text-fade">
+      Have questions about TrackSetu or want to know how it can support your business? Our team is here to help.
+    </p>
+
+    <div class="contact-hero-actions contact-hero-fade contact-hero-actions-fade">
+      <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
+      <app-button variant="secondary" size="lg" (click)="scrollToContact()">Contact Us</app-button>
+    </div>
+  </div>
+</section>
+
+<!-- About TrackSetu -->
+<section class="contact-about">
+  <div class="container contact-about-inner">
+    <div class="contact-about-text" appReveal>
+      <span class="eyebrow">About TrackSetu</span>
+
+      <h2 class="reveal-heading-mask" appReveal [revealDelay]="80">
+        <span class="reveal-heading-line">Built to Make Business Tracking Simpler</span>
+      </h2>
+
+      <p class="supporting" appReveal [revealDelay]="180">
+        TrackSetu is designed to help businesses manage and track their operations with greater clarity and control.
+        It brings important tracking information into one place, making it easier for teams to monitor progress, stay
+        organized, and make informed decisions.
+      </p>
+
+      <p class="supporting" appReveal [revealDelay]="260">
+        Built with a focus on simplicity, reliability, and real-time visibility, TrackSetu helps businesses spend less
+        time managing scattered information and more time moving their operations forward.
+      </p>
+    </div>
+
+    <div class="contact-about-visual" appReveal [revealDelay]="160">
+      <img src="/images/01-dashboard.png" alt="TrackSetu dashboard" class="contact-about-image" />
+    </div>
+  </div>
+</section>
+
+<!-- Contact Details -->
+<section class="contact-details" id="contact-details">
+  <div class="container">
+    <div class="contact-details-heading">
+      <span class="eyebrow" appReveal>Contact Details</span>
+
+      <h2 class="reveal-heading-mask" appReveal [revealDelay]="80">
+        <span class="reveal-heading-line">Let's Stay Connected</span>
+      </h2>
+
+      <p class="supporting" appReveal [revealDelay]="180">
+        Our team is here to answer your questions and help you understand how TrackSetu can fit your business needs.
+      </p>
+    </div>
+
+    <div class="contact-details-layout">
+      <ul class="contact-detail-list">
+        <li
+          class="contact-detail-item"
+          *ngFor="let detail of contactDetails; let i = index"
+          appReveal
+          [revealDelay]="260 + i * 80"
+        >
+          <span class="contact-detail-icon" [class]="detail.colorClass">
+            <svg *ngIf="detail.icon === 'mail'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <svg *ngIf="detail.icon === 'phone'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <svg *ngIf="detail.icon === 'location'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <svg *ngIf="detail.icon === 'clock'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </span>
+
+          <span class="contact-detail-body">
+            <span class="contact-detail-label">{{ detail.label }}</span>
+
+            <span class="contact-detail-value" *ngIf="!detail.linkReplacesValue">
+              <ng-container *ngFor="let line of detail.lines; let last = last">{{ line }}<br *ngIf="!last" /></ng-container>
+            </span>
+
+            <a
+              *ngIf="detail.link"
+              [href]="detail.link"
+              target="_blank"
+              rel="noopener"
+              class="contact-detail-link"
+              [class.contact-detail-link-value]="detail.linkReplacesValue"
+            >
+              {{ detail.linkLabel }}
+              <svg *ngIf="!detail.linkReplacesValue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </span>
+        </li>
+      </ul>
+
+      <div class="contact-map" appReveal [revealDelay]="340">
+        <iframe
+          [src]="mapEmbedUrl"
+          title="TrackSetu office location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

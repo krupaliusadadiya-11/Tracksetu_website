@@ -90,6 +90,70 @@
   margin-top: var(--space-3);
 }
 
+/* ---------------------------------------------------------------- */
+/* Hero staged entrance - plays once on load, same keyframes/timing/ */
+/* easing as the Home and Features hero sequence (hero is always in  */
+/* the initial viewport, so the content column doesn't use the       */
+/* scroll [appReveal] directive used elsewhere on this page).        */
+/*   Step 0 (0ms-280ms):   eyebrow fades up                          */
+/*   Step 1 (160ms-640ms): heading reveals, masked slide-up          */
+/*   Step 2 (640ms-970ms): supporting text, then buttons             */
+/* ---------------------------------------------------------------- */
+
+@keyframes industryHeadingLineIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes industryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.industry-fade-up {
+  opacity: 0;
+  animation: industryFadeUp 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.industry-eyebrow-fade {
+  animation-delay: 0ms;
+}
+
+.industry-hero-heading .reveal-heading-line {
+  animation: industryHeadingLineIn 480ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+.industry-text-fade {
+  animation-duration: 320ms;
+  animation-delay: 640ms;
+}
+
+.industry-actions-fade {
+  animation-duration: 330ms;
+  animation-delay: 800ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .industry-fade-up,
+  .industry-hero-heading .reveal-heading-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .industry-hero-visual {
   position: relative;
 }

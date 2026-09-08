@@ -12,6 +12,8 @@
       <span class="footer-links-title">Company</span>
       <a routerLink="/">Home</a>
       <a routerLink="/features">Features</a>
+      <a routerLink="/pricing">Pricing</a>
+      <a routerLink="/contact">Contact</a>
       <a routerLink="/book-a-demo">Book a Demo</a>
     </nav>
 
@@ -19,6 +21,13 @@
       <span class="footer-links-title">Industries</span>
       <a *ngFor="let industry of industries" [routerLink]="['/industries', industry.slug]">
         {{ industry.label }}
+      </a>
+    </nav>
+
+    <nav class="footer-links" aria-label="Resources">
+      <span class="footer-links-title">Resources</span>
+      <a *ngFor="let resource of resources" [routerLink]="resource.routerLink">
+        {{ resource.label }}
       </a>
     </nav>
   </div>
