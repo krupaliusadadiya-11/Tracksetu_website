@@ -16,7 +16,10 @@ export class ButtonComponent {
   @Input() variant: ButtonVariant = 'primary';
   @Input() size: ButtonSize = 'md';
   @Input() routerLink?: string;
+  @Input() fragment?: string;
   @Input() href?: string;
+  @Input() target?: string;
+  @Input() rel?: string;
   @Input() type: 'button' | 'submit' = 'button';
   @Input() ariaLabel?: string;
   @Input() disabled = false;

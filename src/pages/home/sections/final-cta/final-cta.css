@@ -16,6 +16,8 @@
 .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .reveal-heading-line {
@@ -52,6 +54,22 @@
   color: var(--color-text-secondary);
 }
 
-.final-cta-inner app-button {
+.final-cta-actions {
   margin-top: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .final-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .final-cta-actions app-button {
+    width: 100%;
+  }
 }

@@ -1,12 +1,23 @@
 <section class="final-cta">
   <div class="container final-cta-inner" appReveal>
-    <span class="eyebrow">Get Started</span>
-    <h2 class="reveal-heading-mask"><span class="reveal-heading-line">See What TrackSetu Can Do for Your Business</span></h2>
+    <span class="eyebrow">{{ eyebrow }}</span>
+    <h2 class="reveal-heading-mask"><span class="reveal-heading-line">{{ heading }}</span></h2>
     <p class="supporting">
-      Get a guided look at TrackSetu and see how it can fit your day-to-day business operations.
+      {{ description }}
     </p>
-    <app-button variant="primary" size="lg" routerLink="/book-a-demo">
-      Book a Demo
-    </app-button>
+    <div class="final-cta-actions">
+      <app-button variant="primary" size="lg" [routerLink]="primaryLink" [fragment]="primaryFragment">
+        {{ primaryLabel }}
+      </app-button>
+      <app-button
+        *ngIf="secondaryLabel"
+        variant="secondary"
+        size="lg"
+        [routerLink]="secondaryLink"
+        [fragment]="secondaryFragment"
+      >
+        {{ secondaryLabel }}
+      </app-button>
+    </div>
   </div>
 </section>

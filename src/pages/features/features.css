@@ -198,6 +198,8 @@
 .features-heading .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .features-heading .reveal-heading-line {
@@ -283,8 +285,8 @@
 
 .feature-block.feature-reverse {
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 0.8fr);
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
 }
 
 .feature-block.feature-reverse .feature-content {
@@ -359,23 +361,35 @@
   max-width: auto;
 }
 
+.feature-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  margin-bottom: 12px;
+}
+
 .feature-number {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
+  justify-content: center;
 
-  margin-bottom: 8px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
 
-  font-size: 13px;
+  border-radius: var(--radius-pill);
+  background: var(--color-teal-tint);
+
+  font-size: var(--font-size-small);
   font-weight: 700;
-  letter-spacing: 0.16em;
 
   color: var(--color-secondary);
 }
 
 .feature-label {
   display: block;
-
-  margin-bottom: 12px;
 
   font-size: 14px;
   font-weight: 700;
@@ -758,11 +772,7 @@
      Feature content
      ----------------------------------------- */
 
-  .feature-number {
-    margin-bottom: 7px;
-  }
-
-  .feature-label {
+  .feature-title-row {
     margin-bottom: 9px;
   }
 

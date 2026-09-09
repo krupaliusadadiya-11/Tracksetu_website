@@ -153,8 +153,17 @@ button {
   outline-offset: 2px;
 }
 
-/* Scroll-reveal animation, applied via the [appReveal] directive */
-.reveal {
+/*
+ * Scroll-reveal animation, applied via the [appReveal] directive. The
+ * [appReveal] attribute selector (not just the .reveal class the directive
+ * adds in ngOnInit) sets the initial hidden state, because the attribute is
+ * already present the instant Angular creates the element - before any
+ * directive JS runs. Without it, an element could paint fully visible for
+ * one frame on navigation, then snap to hidden once ngOnInit caught up,
+ * then fade back in: a visible "flash" before the real reveal.
+ */
+.reveal,
+[appReveal] {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity var(--motion-slow), transform var(--motion-slow);
@@ -167,7 +176,8 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  [appReveal] {
     opacity: 1;
     transform: none;
     transition: none;

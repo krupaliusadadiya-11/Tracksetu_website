@@ -6,6 +6,7 @@
   *ngIf="routerLink; else hrefOrButton"
   class="btn btn-{{ variant }} btn-{{ size }}"
   [routerLink]="routerLink"
+  [fragment]="fragment"
   [attr.aria-label]="ariaLabel || null"
 >
   <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
@@ -16,6 +17,8 @@
     *ngIf="href; else plainButton"
     class="btn btn-{{ variant }} btn-{{ size }}"
     [href]="href"
+    [attr.target]="target || null"
+    [attr.rel]="rel || null"
     [attr.aria-label]="ariaLabel || null"
   >
     <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>

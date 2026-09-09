@@ -1,20 +1,134 @@
-<section class="coming-soon">
-  <div class="container coming-soon-inner" appReveal>
-    <span class="coming-soon-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-        <circle cx="9" cy="7" r="4"></circle>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-      </svg>
-    </span>
+<!-- Hero -->
+<section class="stories-hero">
+  <div class="stories-hero-glow" aria-hidden="true"></div>
 
-    <span class="eyebrow">Resources</span>
-    <h1>Customer Stories</h1>
-    <p class="supporting">
-      Real stories from businesses running on TrackSetu are on their way.
-    </p>
+  <div class="container stories-hero-inner">
+    <div class="stories-hero-text">
+      <span class="eyebrow stories-hero-eyebrow">Customer Stories</span>
 
-    <app-button variant="primary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
+      <h1>
+        <span class="reveal-heading-mask">
+          <span class="reveal-heading-line text-highlight stories-hero-line-1">Real Businesses.</span>
+        </span>
+        <span class="reveal-heading-mask">
+          <span class="reveal-heading-line stories-hero-line-2">Real Workflows.</span>
+        </span>
+      </h1>
+
+      <p class="supporting stories-hero-supporting">
+        See how TrackSetu is being shaped around real business needs, starting with its first implementation for
+        SAGA CERA.
+      </p>
+
+      <div class="stories-hero-actions">
+        <app-button variant="primary" size="lg" [routerLink]="'/customer-stories/' + featuredSlug">
+          Explore Case Study
+        </app-button>
+        <app-button variant="secondary" size="lg" routerLink="/book-a-demo">Book a Demo</app-button>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- Tabs + Filter + Grid -->
+<section class="story-directory" id="customer-stories-grid">
+  <div class="container">
+    <app-section-heading
+      appReveal
+      eyebrow="Customer Stories"
+      heading="Testimonials and case studies"
+      supporting="Browse real feedback and in-depth case studies from businesses running on TrackSetu. Each story covers the workflows we set up, the approach we took and what changed once the system went live."
+      class="story-directory-heading"
+    ></app-section-heading>
+
+    <div class="story-tabs" appReveal>
+      <button
+        type="button"
+        class="story-tab"
+        [class.active]="activeTab() === 'testimonials'"
+        (click)="setTab('testimonials')"
+      >
+        Testimonials
+      </button>
+      <button
+        type="button"
+        class="story-tab"
+        [class.active]="activeTab() === 'case-studies'"
+        (click)="setTab('case-studies')"
+      >
+        Case Studies
+      </button>
+    </div>
+
+    <!-- Case Studies grid -->
+    <div
+      class="story-grid"
+      *ngIf="activeTab() === 'case-studies'"
+      [class.grid-single]="caseStudies.length === 1"
+      [class.grid-double]="caseStudies.length === 2"
+      [class.grid-triple]="caseStudies.length >= 3"
+    >
+      <a
+        *ngFor="let story of caseStudies; let i = index"
+        class="case-study-card"
+        [routerLink]="'/customer-stories/' + story.slug"
+        appReveal
+        [revealDelay]="(i % 3) * 80"
+      >
+        <div class="case-study-card-visual">
+          <img [src]="story.image" [alt]="story.imageAlt" loading="lazy" />
+        </div>
+        <div class="case-study-card-body">
+          <span class="case-study-card-industry">{{ story.industry }}</span>
+          <h3>{{ story.client }}</h3>
+          <p class="case-study-card-title">{{ story.title }}</p>
+          <p class="case-study-card-description">{{ story.description }}</p>
+          <span class="case-study-card-cta">Read Case Study &rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Testimonials grid -->
+    <div
+      class="story-grid testimonial-grid"
+      *ngIf="activeTab() === 'testimonials'"
+      [class.grid-single]="testimonials.length === 1"
+      [class.grid-double]="testimonials.length === 2"
+      [class.grid-triple]="testimonials.length >= 3"
+    >
+      <div
+        *ngFor="let testimonial of testimonials; let i = index"
+        class="testimonial-card"
+        appReveal
+        [revealDelay]="(i % 3) * 80"
+      >
+        <span class="testimonial-stack-layer testimonial-stack-layer-2" aria-hidden="true"></span>
+        <span class="testimonial-stack-layer testimonial-stack-layer-1" aria-hidden="true"></span>
+
+        <div class="testimonial-card-inner">
+          <p class="testimonial-quote">&ldquo;{{ testimonial.quote }}&rdquo;</p>
+
+          <div class="testimonial-byline">
+            <span class="testimonial-avatar">{{ testimonial.name.charAt(0) }}</span>
+            <span class="testimonial-byline-text">
+              <span class="testimonial-name">{{ testimonial.name }}</span>
+              <span class="testimonial-role-line">
+                <span class="testimonial-role" *ngIf="testimonial.role">{{ testimonial.role }}</span>
+                <span class="testimonial-company">{{ testimonial.company }}</span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-empty" *ngIf="testimonials.length === 0" appReveal>
+        <h3>Testimonials coming soon</h3>
+        <p>
+          As more businesses complete their TrackSetu implementation, their feedback will appear here.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-final-cta-section></app-final-cta-section>

@@ -2,6 +2,8 @@
 .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .reveal-heading-line {
@@ -319,6 +321,87 @@
 .industry-screenshots {
   padding: var(--space-10) 0;
   background: var(--color-surface);
+}
+
+/* ===================== Built With a Real Tile Business (Tiles only) ===================== */
+.industry-first-client {
+  padding: var(--space-10) 0;
+  background: var(--color-background);
+}
+
+.industry-first-client-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.industry-first-client-inner .eyebrow {
+  align-self: center;
+}
+
+.industry-first-client-inner h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-text-primary);
+  margin-top: var(--space-1);
+}
+
+.industry-first-client-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.industry-first-client-mark {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-surface);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+}
+
+.industry-first-client-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.industry-first-client-name {
+  font-weight: 700;
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+.industry-first-client-type {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 600px) {
+  .industry-first-client-badge {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .industry-first-client-info {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .industry-gallery-wrap {

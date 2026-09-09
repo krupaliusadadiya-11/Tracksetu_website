@@ -1,0 +1,195 @@
+/* ===================== Quote hero ===================== */
+/* Dark band pairing the real client quote with the real environment photo -
+   TrackSetu's own navy/teal instead of a generic dark theme. */
+.cs-quote-hero {
+  background: var(--color-primary);
+  overflow: hidden;
+}
+
+.cs-quote-hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-8) 0;
+}
+
+.cs-quote-hero-text {
+  max-width: 640px;
+}
+
+.cs-quote-hero-quote {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-surface);
+}
+
+.cs-quote-hero-author {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.cs-quote-hero-image {
+  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+  border-radius: var(--radius-card);
+  object-fit: cover;
+  box-shadow: var(--shadow-raised);
+}
+
+/* ===================== Document body ===================== */
+/* Plain document layout: no tinted sections, no card containers. Content
+   reads top to bottom on the left at regular body text size; the client
+   detail block stays pinned on the right while the page scrolls. */
+.cs-doc {
+  padding: var(--space-8) 0 var(--space-10);
+  background: var(--color-background);
+}
+
+.cs-doc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.cs-doc-content {
+  max-width: 680px;
+  font-size: var(--font-size-body);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.cs-doc-kicker {
+  margin: 0;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.cs-doc-content h1 {
+  margin: var(--space-1) 0 var(--space-4);
+  font-size: var(--font-size-h4);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+.cs-doc-content h2 {
+  margin: var(--space-6) 0 var(--space-2);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.cs-doc-content p {
+  margin: var(--space-2) 0;
+}
+
+.cs-doc-content ul {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-doc-content li {
+  color: var(--color-text-secondary);
+}
+
+.cs-doc-content strong {
+  color: var(--color-text-primary);
+}
+
+.cs-doc-content app-button {
+  display: inline-block;
+  margin-top: var(--space-3);
+}
+
+.cs-doc-highlight {
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+
+.cs-doc-attribution {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+/* Sidebar */
+.cs-doc-sidebar {
+  position: sticky;
+  top: 96px;
+}
+
+.cs-doc-sidebar-label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.cs-doc-sidebar-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cs-doc-sidebar-list dt {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}
+
+.cs-doc-sidebar-list dd {
+  margin: 2px 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-primary);
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 900px) {
+  .cs-doc-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .cs-doc-sidebar {
+    position: static;
+    order: -1;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cs-doc-sidebar-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 700px) {
+  .cs-quote-hero-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-6) 0;
+  }
+
+  .cs-quote-hero-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .cs-quote-hero-quote {
+    font-size: var(--font-size-body);
+  }
+}

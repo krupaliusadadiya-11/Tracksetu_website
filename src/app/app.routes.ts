@@ -79,6 +79,15 @@ export const routes: Routes = [
       },
 
       {
+        path: 'customer-stories/:slug',
+        loadComponent: () =>
+          import(
+            '../pages/customer-stories/case-study-detail/case-study-detail'
+          ).then((m) => m.CaseStudyDetailPage),
+        title: 'Customer Stories - TrackSetu',
+      },
+
+      {
         path: 'pricing',
         loadComponent: () =>
           import('../pages/pricing/pricing').then((m) => m.PricingPage),

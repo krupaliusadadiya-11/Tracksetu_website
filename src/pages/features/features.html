@@ -100,6 +100,7 @@
         [class.feature-reverse]="i % 2 !== 0"
         [id]="feature.id"
         appReveal
+        [revealDelay]="i === 0 ? 950 : 0"
       >
 
         <!-- Feature content: slides in from whichever side it's actually
@@ -108,12 +109,14 @@
              a single "the user reached this block" moment. -->
         <div class="feature-content">
 
-          <div class="feature-number">
-            {{ feature.number }}
-          </div>
+          <div class="feature-title-row">
+            <span class="feature-number">
+              {{ feature.number }}
+            </span>
 
-          <div class="feature-label">
-            {{ feature.title }}
+            <div class="feature-label">
+              {{ feature.title }}
+            </div>
           </div>
 
           <h3>

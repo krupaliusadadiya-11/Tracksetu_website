@@ -1,0 +1,120 @@
+<ng-container *ngIf="story as story">
+  <!-- Quote hero (when a real testimonial exists) -->
+  <section class="cs-quote-hero" *ngIf="story.testimonial as testimonial">
+    <div class="container cs-quote-hero-inner">
+      <div class="cs-quote-hero-text">
+        <blockquote class="cs-quote-hero-quote">&ldquo;{{ testimonial.quote }}&rdquo;</blockquote>
+        <p class="cs-quote-hero-author">&ndash; {{ testimonial.name }}</p>
+      </div>
+      <img
+        class="cs-quote-hero-image"
+        [src]="story.image"
+        [alt]="story.imageAlt"
+      />
+    </div>
+  </section>
+
+  <!-- Document body: content left (scrolls with the page), client details right (sticky) -->
+  <section class="cs-doc">
+    <div class="container cs-doc-grid">
+      <article class="cs-doc-content">
+        <p class="cs-doc-kicker">{{ story.client }} &times; TrackSetu</p>
+        <h1>Building a Connected Operational System for a Tile Business</h1>
+
+        <p>
+          SAGA CERA is a tile and sanitary business managing multiple connected activities across quotations,
+          orders, inventory, purchasing, and payments.
+        </p>
+        <p>
+          TrackSetu's first customer implementation was shaped around these operational requirements, bringing
+          these workflows together into a more structured and connected system.
+        </p>
+        <p>
+          SAGA CERA's daily operations involve several processes that depend on one another. Managing these
+          processes as a connected workflow was an important requirement for the implementation.
+        </p>
+
+        <h2>The Business Need</h2>
+        <p>A typical business process can move through several stages:</p>
+        <p class="cs-doc-highlight">Quotation &rarr; Order &rarr; Inventory &rarr; Purchasing &rarr; Payment</p>
+        <p>
+          Each stage is connected to the next. The requirement was to create a system where these activities could
+          be managed as part of one operational flow rather than as isolated processes.
+        </p>
+        <p>The key areas included:</p>
+        <ul>
+          <li><strong>Quotations</strong> &mdash; managing customer requirements and quotations</li>
+          <li><strong>Orders</strong> &mdash; connecting confirmed requirements to operations</li>
+          <li><strong>Inventory</strong> &mdash; managing product and stock-related information</li>
+          <li><strong>Purchasing</strong> &mdash; connecting purchasing requirements with operations</li>
+          <li><strong>Payments</strong> &mdash; keeping the final stage connected to the overall workflow</li>
+        </ul>
+
+        <h2>The TrackSetu Approach</h2>
+        <p>TrackSetu was shaped around SAGA CERA's actual operational workflow.</p>
+        <p>
+          Instead of treating each business activity as a separate function, the implementation connects the
+          different stages of the process:
+        </p>
+        <p class="cs-doc-highlight">Quotation &rarr; Order &rarr; Inventory &rarr; Purchasing &rarr; Payment</p>
+        <p>
+          This creates a more structured flow of information across the business and provides a centralized
+          foundation for managing related activities.
+        </p>
+
+        <h2>What Became Possible</h2>
+        <p>The implementation provides a foundation for:</p>
+        <ul>
+          <li>Connected workflows across key business activities</li>
+          <li>Centralized information within one system</li>
+          <li>Better operational visibility across processes</li>
+          <li>Less repeated data entry between connected activities</li>
+          <li>More structured day-to-day operations</li>
+        </ul>
+
+        <ng-container *ngIf="story.testimonial as testimonial">
+          <h2>Client Perspective</h2>
+          <p class="cs-doc-highlight">&ldquo;{{ testimonial.quote }}&rdquo;</p>
+          <p class="cs-doc-attribution">&mdash; {{ testimonial.name }}</p>
+        </ng-container>
+
+        <h2>The First TrackSetu Implementation</h2>
+        <p>SAGA CERA represents the first real implementation of TrackSetu.</p>
+        <p>
+          The project provided an opportunity to take real business requirements and shape them into a connected
+          operational system.
+        </p>
+        <p>It also established an important principle for TrackSetu:</p>
+        <p class="cs-doc-highlight">
+          Software should adapt to the way a business works, not force the business to work around the software.
+        </p>
+
+        <h2>Build Around the Way Your Business Works</h2>
+        <p>Every business has its own workflows and operational requirements.</p>
+        <p>
+          TrackSetu brings those processes together into a connected business system shaped around the way your
+          business actually operates.
+        </p>
+        <app-button variant="primary" size="md" routerLink="/book-a-demo">Book a Demo</app-button>
+      </article>
+
+      <aside class="cs-doc-sidebar">
+        <p class="cs-doc-sidebar-label">Client Overview</p>
+        <dl class="cs-doc-sidebar-list">
+          <div>
+            <dt>Client</dt>
+            <dd>{{ story.client }}</dd>
+          </div>
+          <div>
+            <dt>Industry</dt>
+            <dd>{{ story.industry }}</dd>
+          </div>
+          <div>
+            <dt>Implementation</dt>
+            <dd>First customer implementation</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+</ng-container>

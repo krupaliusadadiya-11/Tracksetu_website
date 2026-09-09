@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RevealDirective } from '../../shared/directives/reveal';
 import { ButtonComponent } from '../../shared/ui/button/button';
@@ -17,7 +17,13 @@ interface BusinessTypeOption {
   templateUrl: './book-demo.html',
   styleUrl: './book-demo.css',
 })
-export class BookDemoPage {
+export class BookDemoPage implements AfterViewInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+
+  /** Video not recorded yet - flip to true once it's ready, don't remove the section. */
+  protected readonly showVideoSection = false;
+
   // Drop the walkthrough file at public/video/tracksetu-overview.mp4 and flip this to true.
   protected readonly videoAvailable = false;
   protected readonly videoSrc = 'video/tracksetu-overview.mp4';
@@ -44,6 +50,20 @@ export class BookDemoPage {
       shopCount: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]*$/)]],
       businessType: ['', Validators.required],
       message: [''],
+    });
+  }
+
+  ngAfterViewInit(): void {
+    const fragment = this.route.snapshot.fragment;
+    if (!fragment) return;
+
+    /*
+     * A plain routerLink fragment jump would fire before this lazy-loaded
+     * page's content has painted, causing a visible double-scroll. Waiting
+     * a tick until the view is actually ready gives a single clean jump.
+     */
+    requestAnimationFrame(() => {
+      this.elementRef.nativeElement.querySelector(`#${fragment}`)?.scrollIntoView({ block: 'start' });
     });
   }
 

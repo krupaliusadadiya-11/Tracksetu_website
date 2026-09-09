@@ -25,7 +25,11 @@
   <!-- Industry Problems -->
   <section class="industry-problems">
     <div class="container">
-      <app-section-heading appReveal eyebrow="The Challenge" [heading]="content.problemsHeading"></app-section-heading>
+      <app-section-heading
+        appReveal
+        eyebrow="The Challenge"
+        [heading]="content.problemsHeading"
+      ></app-section-heading>
 
       <div class="problem-grid">
         <article
@@ -125,6 +129,32 @@
 
       <div class="industry-gallery-wrap" appReveal [revealDelay]="120">
         <app-step-gallery [steps]="content.screenshots"></app-step-gallery>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built With a Real Tile Business (Tiles industry only - SAGA CERA is
+       TrackSetu's first implementation and a real tile & sanitary business) -->
+  <section class="industry-first-client" *ngIf="content.slug === 'tiles'">
+    <div class="container industry-first-client-inner" appReveal>
+      <span class="eyebrow">Built With a Real Tile Business</span>
+
+      <h2 class="reveal-heading-mask" appReveal [revealDelay]="80">
+        <span class="reveal-heading-line">Designed around how tile businesses actually operate</span>
+      </h2>
+
+      <p class="supporting" appReveal [revealDelay]="160">
+        TrackSetu was shaped around real operational requirements from the tile business, connecting workflows such
+        as quotations, orders, inventory, purchasing and payments.
+      </p>
+
+      <div class="industry-first-client-badge" appReveal [revealDelay]="240">
+        <span class="industry-first-client-mark">SC</span>
+        <span class="industry-first-client-info">
+          <span class="industry-first-client-name">SAGA CERA</span>
+          <span class="industry-first-client-type">First TrackSetu implementation</span>
+        </span>
+        <app-button variant="secondary" size="md" routerLink="/customer-stories/saga-cera">View SAGA CERA Client Story</app-button>
       </div>
     </div>
   </section>

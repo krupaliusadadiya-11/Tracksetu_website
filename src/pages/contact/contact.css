@@ -3,6 +3,8 @@
 .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .reveal-heading-line {
@@ -120,6 +122,8 @@
 .contact-hero-heading .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .contact-hero-heading .reveal-heading-line {
@@ -206,8 +210,8 @@
 
 .contact-about-image {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   display: block;
 }
 

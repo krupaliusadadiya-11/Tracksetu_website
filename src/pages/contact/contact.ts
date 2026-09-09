@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { RevealDirective } from '../../shared/directives/reveal';
@@ -25,8 +26,10 @@ const OFFICE_ADDRESS = 'G-20, Silver Business Point, VIP Circle to Utran Road, M
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
-export class ContactPage {
+export class ContactPage implements AfterViewInit {
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly route = inject(ActivatedRoute);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
   protected readonly mapEmbedUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     'https://www.google.com/maps?q=' + encodeURIComponent(OFFICE_ADDRESS) + '&output=embed',
@@ -66,6 +69,20 @@ export class ContactPage {
       lines: ['Monday – Saturday', '9:00 AM – 8:00 PM'],
     },
   ];
+
+  ngAfterViewInit(): void {
+    const fragment = this.route.snapshot.fragment;
+    if (!fragment) return;
+
+    /*
+     * A plain routerLink fragment jump would fire before this lazy-loaded
+     * page's content has painted, causing a visible double-scroll. Waiting
+     * a tick until the view is actually ready gives a single clean jump.
+     */
+    requestAnimationFrame(() => {
+      this.elementRef.nativeElement.querySelector(`#${fragment}`)?.scrollIntoView({ block: 'start' });
+    });
+  }
 
   protected scrollToContact(): void {
     document.getElementById('contact-details')?.scrollIntoView({ behavior: 'smooth', block: 'start' });

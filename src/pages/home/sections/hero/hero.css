@@ -390,6 +390,8 @@
 .hero-heading .reveal-heading-mask {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .hero-heading .reveal-heading-line {

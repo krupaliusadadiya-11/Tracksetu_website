@@ -1,40 +1,170 @@
 <footer class="footer">
+  <div class="footer-glow" aria-hidden="true"></div>
+
   <div class="footer-inner container" appReveal>
-    <div class="footer-brand">
-      <a routerLink="/" class="brand" aria-label="TrackSetu home">
-        <span class="brand-mark">T</span>
-        <span class="brand-name">TrackSetu</span>
-      </a>
-      <p class="tagline">One connected system to run your business better.</p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a routerLink="/" class="brand" aria-label="TrackSetu home">
+          <img src="/images/TrackSetuLogo.jpg" alt="TrackSetu" class="brand-logo" />
+          <span class="brand-name">TrackSetu</span>
+        </a>
+        <p class="tagline">
+          One connected system to run your business better. </p>
+               <p class="tagline">
+          TrackSetu brings quotations, orders, purchasing,
+          stock, delivery, payments and reports together, built for businesses managing products, multiple
+          locations and day-to-day sales operations.
+        </p>
+
+        <app-button
+          variant="secondary"
+          size="lg"
+          href="https://www.google.com/maps/dir/?api=1&destination=G-20%2C%20Silver%20Business%20Point%2C%20VIP%20Circle%20to%20Utran%20Road%2C%20Mota%20Varachha%2C%20Surat%2C%20Gujarat%20394105"
+          target="_blank"
+          rel="noreferrer"
+          ariaLabel="Get directions to TrackSetu office"
+        >
+          Get Directions
+        </app-button>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <span class="footer-links-title">Company</span>
+        <a routerLink="/">Home</a>
+        <a routerLink="/features">Features</a>
+        <a routerLink="/pricing">Pricing</a>
+        <a routerLink="/contact">Contact</a>
+        <a routerLink="/book-a-demo">Book a Demo</a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Industries">
+        <span class="footer-links-title">Industries</span>
+        <a *ngFor="let industry of industries" [routerLink]="['/industries', industry.slug]">
+          {{ industry.label }}
+        </a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Resources">
+        <span class="footer-links-title">Resources</span>
+        <a *ngFor="let resource of resources" [routerLink]="resource.routerLink">
+          {{ resource.label }}
+        </a>
+      </nav>
+
+      <div class="footer-contact" aria-label="Contact details">
+        <span class="footer-links-title">Contact</span>
+
+        <a class="footer-contact-item" href="mailto:info@micropillartech.com">
+          <span class="footer-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </span>
+          <span class="footer-contact-body">
+            <span class="footer-contact-label">Email</span>
+            <span class="footer-contact-value">info&#64;micropillartech.com</span>
+          </span>
+        </a>
+
+        <a class="footer-contact-item" href="tel:+917984273653">
+          <span class="footer-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </span>
+          <span class="footer-contact-body">
+            <span class="footer-contact-label">Phone</span>
+            <span class="footer-contact-value">+91 79842 73653</span>
+          </span>
+        </a>
+
+        <a
+          class="footer-contact-item"
+          href="https://www.google.com/maps/dir/?api=1&destination=G-20%2C%20Silver%20Business%20Point%2C%20VIP%20Circle%20to%20Utran%20Road%2C%20Mota%20Varachha%2C%20Surat%2C%20Gujarat%20394105"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="footer-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </span>
+          <span class="footer-contact-body">
+            <span class="footer-contact-label">Office</span>
+            <span class="footer-contact-value">G-20, Silver Business Point, Mota Varachha, Surat, Gujarat 394105</span>
+          </span>
+        </a>
+      </div>
     </div>
 
-    <nav class="footer-links" aria-label="Footer navigation">
-      <span class="footer-links-title">Company</span>
-      <a routerLink="/">Home</a>
-      <a routerLink="/features">Features</a>
-      <a routerLink="/pricing">Pricing</a>
-      <a routerLink="/contact">Contact</a>
-      <a routerLink="/book-a-demo">Book a Demo</a>
-    </nav>
+    <div class="footer-divider"></div>
 
-    <nav class="footer-links" aria-label="Industries">
-      <span class="footer-links-title">Industries</span>
-      <a *ngFor="let industry of industries" [routerLink]="['/industries', industry.slug]">
-        {{ industry.label }}
-      </a>
-    </nav>
-
-    <nav class="footer-links" aria-label="Resources">
-      <span class="footer-links-title">Resources</span>
-      <a *ngFor="let resource of resources" [routerLink]="resource.routerLink">
-        {{ resource.label }}
-      </a>
-    </nav>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container">
+    <div class="footer-bottom-row">
       <span>&copy; {{ year }} TrackSetu. All rights reserved.</span>
+
+      <div class="social-links" aria-label="Social links">
+        <a
+          class="social-icon"
+          href="https://www.linkedin.com/company/micropillar/posts/?feedView=all"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.64h.05c.53-.98 1.83-2.02 3.77-2.02 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9z"></path>
+          </svg>
+        </a>
+        <a
+          class="social-icon"
+          href="https://www.instagram.com/micropillar/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Instagram"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M17.5 6.5h.01"></path>
+          </svg>
+        </a>
+        <a
+          class="social-icon"
+          href="https://www.facebook.com/pacificsurat/photos/-micropillar-tech-internship-role-intern-angular-reactjs-nodejs-net-core-eligibi/1500269928779894/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Facebook"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 9V6.5c0-.83.67-1.5 1.5-1.5H17V2h-2.5A4.5 4.5 0 0 0 10 6.5V9H8v3h2v10h4V12h2.6l.4-3H14z"></path>
+          </svg>
+        </a>
+        <a
+          class="social-icon"
+          href="https://github.com/search?q=micropillar&type=repositories"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"></path>
+          </svg>
+        </a>
+      </div>
     </div>
+
   </div>
+
+  <button
+    type="button"
+    class="back-to-top"
+    [class.visible]="showBackToTop()"
+    (click)="scrollToTop()"
+    aria-label="Back to top"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
 </footer>

@@ -19,7 +19,9 @@
       </div>
 
       <div class="blog-article-visual" appReveal [revealDelay]="120">
-        <img [src]="post.image" [alt]="post.title" class="blog-featured-image" />
+        <div class="blog-featured-image-frame">
+          <img [src]="post.image" [alt]="post.title" class="blog-featured-image" />
+        </div>
       </div>
     </div>
   </header>
