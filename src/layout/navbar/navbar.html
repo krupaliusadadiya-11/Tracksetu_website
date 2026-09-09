@@ -13,7 +13,12 @@
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
       <a routerLink="/features" routerLinkActive="active" (click)="closeMenu()">Features</a>
 
-      <div class="nav-dropdown" [class.open]="industriesOpen()">
+      <div
+        class="nav-dropdown"
+        [class.open]="industriesOpen()"
+        (mouseenter)="openIndustries()"
+        (mouseleave)="scheduleCloseDropdowns()"
+      >
         <button
           type="button"
           class="nav-dropdown-trigger"
@@ -40,7 +45,12 @@
         </div>
       </div>
 
-      <div class="nav-dropdown" [class.open]="resourcesOpen()">
+      <div
+        class="nav-dropdown"
+        [class.open]="resourcesOpen()"
+        (mouseenter)="openResources()"
+        (mouseleave)="scheduleCloseDropdowns()"
+      >
         <button
           type="button"
           class="nav-dropdown-trigger"

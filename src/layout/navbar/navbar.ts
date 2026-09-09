@@ -22,6 +22,8 @@ export class NavbarComponent {
   protected readonly industriesOpen = signal(false);
   protected readonly resourcesOpen = signal(false);
 
+  private closeTimeout?: ReturnType<typeof setTimeout>;
+
   protected readonly industries = INDUSTRY_SLUGS.map((slug) => ({
     slug,
     label: INDUSTRY_CONTENT[slug].navLabel,
@@ -53,5 +55,25 @@ export class NavbarComponent {
   toggleResources(): void {
     this.resourcesOpen.update((open) => !open);
     this.industriesOpen.set(false);
+  }
+
+  openIndustries(): void {
+    clearTimeout(this.closeTimeout);
+    this.industriesOpen.set(true);
+    this.resourcesOpen.set(false);
+  }
+
+  openResources(): void {
+    clearTimeout(this.closeTimeout);
+    this.resourcesOpen.set(true);
+    this.industriesOpen.set(false);
+  }
+
+  scheduleCloseDropdowns(): void {
+    clearTimeout(this.closeTimeout);
+    this.closeTimeout = setTimeout(() => {
+      this.industriesOpen.set(false);
+      this.resourcesOpen.set(false);
+    }, 150);
   }
 }

@@ -63,7 +63,7 @@
   margin-top: 2px;
   font-size: var(--font-size-small);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   opacity: 0;
   animation: pricingFadeUp 380ms cubic-bezier(0.22, 1, 0.36, 1) 560ms both;
 }
